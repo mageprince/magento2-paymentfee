@@ -6,33 +6,40 @@ Magento 2 Payment Fee
 
 "Payment Fee" is an extension for add extra fee to the order by selecting specific payment method of your Magento 2 online store. Let your customers see the payment fee on cart page, checkout page, Invoice, Creditmemo, Order emails and Order prints.
 
-Installation instructions
-=========================
+<h3><a href="https://marketplace.magento.com/media/catalog/product/prince-magento2-paymentfee-2-0-0-ce/user_guides.pdf">User Guide</a></h3>
 
-* Create folder `app/code/Prince/Paymentfee` and copy the content of the repo 
-* Run command:
-<b>php bin/magento setup:upgrade</b>
-* Run Command:
-<b>php bin/magento setup:static-content:deploy</b>
+# New Features
+<ul>
+<li>Multi-store support</li>
+<li>Multi-currency support</li>
+<li>Support tax calculation on the payment fee</li>
+<li>Allow admin to select tax class for the payment fee</li>
+<li>Customer group restrictions</li>
+<li>Admin can set the sort order of payment fee</li>
+</ul>
 
-# Contribution
+<b>Check full description on <a href="https://marketplace.magento.com/prince-magento2-paymentfee.html">Magento Marketplace</a></b>
 
-Want to contribute to this extension? The quickest way is to <a href="https://help.github.com/articles/about-pull-requests/">open a pull request</a> on GitHub.
+# Demo
 
-# Support
-
-If you encounter any problems or bugs, please <a href="https://github.com/mageprince/magento2-paymentfee/issues">open an issue</a> on GitHub.
+<b><a href="http://demo.mageprince.com/">Frontend</a>   |   <a href="http://demo.mageprince.com/admin">Backend</a></b>
 
 # Screenshots
 
-<b>Checkout Page</b>
+<h3>Checkout Page</h3>
+<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/checkout_page_2.png" />
 
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/Checkout.png" />
+<h3>Configuration</h3>
+<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/new_config_2.png" />
+<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/new_config_1.png" />
 
-<b>Configuration General Settings</b>
+<h3>Frontend - My Order</h3>
+<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/customer_order_invoice_creditmemo.png" />
 
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/configuration_1.png" />
+<h3>Sales Emails</h3>
+<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/sales_email.png" />
 
-<b>Configuration Payment Fee Settings</b>
+<h3>Admin - Order, Invoice, CreditMemo</h3>
+<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/admin_order_invoice_creditmemo.png" />
 
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/configuration_2.png" />
+
