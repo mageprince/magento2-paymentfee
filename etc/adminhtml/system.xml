@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagePrince
+ * Copyright (C) 2020 Mageprince <info@mageprince.com>
+ *
+ * @package Mageprince_Paymentfee
+ * @copyright Copyright (c) 2020 Mageprince (http://www.mageprince.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MagePrince <info@mageprince.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageprince" translate="label" sortOrder="110" class="mageprince-tab">
+            <label>MagePrince</label>
+        </tab>
+        <section id="paymentfee" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Payment Fee</label>
+            <tab>mageprince</tab>
+            <resource>Mageprince_Paymentfee::paymentfee_settings</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="is_description" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Description</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="description" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <validate>required-entry</validate>
+                    <comment>Payment Fee Description</comment>
+                    <depends>
+                        <field id="paymentfee/general/is_description">1</field>
+                    </depends>
+                </field>
+                <field id="total_sortorder" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Totals Sort Order</label>
+                    <validate>required-number validate-number</validate>
+                </field>
+            </group>
+            <group id="paymentfee_settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Payment Fee Settings</label>
+                <field id="pricetype" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Price Type</label>
+                    <source_model>Mageprince\Paymentfee\Model\Config\Source\PriceType</source_model>
+                </field>
+                <field id="include_shipping" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include shipping in subtotal </label>
+                    <source_model>Mageprince\Paymentfee\Model\Config\Source\Calculation</source_model>
+                    <depends>
+                        <field id="pricetype">1</field>
+                    </depends>
+                </field>
+                <field id="include_discount" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include discount in subtotal</label>
+                    <source_model>Mageprince\Paymentfee\Model\Config\Source\Calculation</source_model>
+                    <depends>
+                        <field id="pricetype">1</field>
+                    </depends>
+                </field>
+                <field id="minorderamount" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimum order amount</label>
+                    <comment><![CDATA[Minimum order amount to apply Payment Fee]]></comment>
+                    <validate>required-entry validate-number</validate>
+                </field>
+                <field id="maxorderamount" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Maximum order amount</label>
+                    <comment><![CDATA[Maximum order amount to exclude Payment Fee]]></comment>
+                    <validate>required-entry validate-number</validate>
+                </field>
+                <field id="refund" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Refund fee</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="paymentfee" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Method Payment Fee</label>
+                    <frontend_model>Mageprince\Paymentfee\Block\Adminhtml\System\Form\Field\PaymentFee</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+                <field id="customers" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply Payment Fee For Specific Customers</label>
+                    <source_model>Magento\Customer\Model\ResourceModel\Group\Collection</source_model>
+                    <validate>required-entry</validate>
+                </field>
+            </group>
+            <group id="tax" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Tax Settings</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Calculate Tax</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="tax_class" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tax Class</label>
+                    <source_model>Magento\Tax\Model\TaxClass\Source\Product</source_model>
+                    <depends>
+                        <field id="paymentfee/tax/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

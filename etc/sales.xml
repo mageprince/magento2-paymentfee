@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagePrince
+ * Copyright (C) 2020 Mageprince <info@mageprince.com>
+ *
+ * @package Mageprince_Paymentfee
+ * @copyright Copyright (c) 2020 Mageprince (http://www.mageprince.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MagePrince <info@mageprince.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="payment_fee" instance="Mageprince\Paymentfee\Model\Total\Fee" sort_order="500"/>
+        </group>
+    </section>
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="payment_fee" instance="Mageprince\Paymentfee\Model\Invoice\Total\Fee" sort_order="305"/>
+        </group>
+    </section>
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="payment_fee" instance="Mageprince\Paymentfee\Model\Creditmemo\Total\Fee" sort_order="305"/>
+        </group>
+    </section>
+</config>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagePrince
+ * Copyright (C) 2020 Mageprince <info@mageprince.com>
+ *
+ * @package Mageprince_Paymentfee
+ * @copyright Copyright (c) 2020 Mageprince (http://www.mageprince.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MagePrince <info@mageprince.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <paymentfee>
+            <general>
+                <active>0</active>
+                <title>Payment Fee</title>
+                <is_description>0</is_description>
+                <description>Test Payment Fee Description</description>
+                <total_sortorder>35</total_sortorder>
+            </general>
+            <paymentfee_settings>
+                <pricetype>0</pricetype>
+                <include_shipping>0</include_shipping>
+                <include_discount>0</include_discount>
+                <minorderamount>0</minorderamount>
+                <maxorderamount>99999</maxorderamount>
+                <refund>1</refund>
+                <customers>0,1,2,3,4</customers>
+            </paymentfee_settings>
+            <tax>
+                <enable>0</enable>
+                <tax_class>2</tax_class>
+            </tax>
+        </paymentfee>
+        <sales>
+            <totals_sort>
+                <mageprince_paymentfee>35</mageprince_paymentfee>
+            </totals_sort>
+        </sales>
+    </default>
+</config>
