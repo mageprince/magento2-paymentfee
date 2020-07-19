@@ -47,6 +47,24 @@ According to the payment method, there are several options for counting payment 
 
 <b><a href="http://demo.mageprince.com/">Frontend</a>   |   <a href="http://demo.mageprince.com/admin">Backend</a></b>
 
+# Installation Instruction
+
+* Copy the content of the repo to the Magento 2 `app/code/Mageprince/Paymentfee`
+* Run command:
+<b>php bin/magento setup:upgrade</b>
+* Run Command:
+<b>php bin/magento setup:static-content:deploy</b>
+* Now Flush Cache: <b>php bin/magento cache:flush</b>
+
+
+# Contribution
+
+Want to contribute to this extension? The quickest way is to <a href="https://help.github.com/articles/about-pull-requests/">open a pull request</a> on GitHub.
+
+# Support
+
+If you encounter any problems or bugs, please <a href="https://github.com/mageprince/magento2-paymentfee/issues">open an issue</a> on GitHub.
+
 # Screenshots
 
 <h3>Checkout Page</h3>
