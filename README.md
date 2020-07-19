@@ -12,7 +12,8 @@ According to the payment method, there are several options for counting payment 
 <b><a href="https://marketplace.magento.com/media/catalog/product/prince-magento2-paymentfee-2-0-0-ce/user_guides.pdf">User Guide</a></b>
 
 
-# New Features
+New Features
+==============================
 <ul>
 <li>Multi-store support</li>
 <li>Multi-currency support</li>
@@ -23,7 +24,8 @@ According to the payment method, there are several options for counting payment 
 <li>Calculate discount or shipping amount in subtotal</li>
 </ul>
 
-# Features
+Features
+==============================
 
 <ul>
 <li>Enable or disable extension from the admin configuration</li>
@@ -43,7 +45,8 @@ According to the payment method, there are several options for counting payment 
 <li>Admin can disable payment fees on the maximum order amount by adding the max order amount from the admin configuration</li>
 </ul>
 
-# Demo
+Demo
+==============================
 
 <b><a href="http://demo.mageprince.com/">Frontend</a>   |   <a href="http://demo.mageprince.com/admin">Backend</a></b>
 
