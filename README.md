@@ -7,7 +7,7 @@ According to the payment method, there are several options for counting payment 
 
 <h3>Magento Marketplace : </h3>
 
-<b><a href="https://marketplace.magento.com/prince-magento2-paymentfee.html">Extension Link</a><b>
+<b><a href="https://marketplace.magento.com/prince-magento2-paymentfee.html">Extension Link</a></b>
   
 <b><a href="https://marketplace.magento.com/media/catalog/product/prince-magento2-paymentfee-2-0-0-ce/user_guides.pdf">User Guide</a></b>
 
