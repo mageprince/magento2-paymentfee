@@ -82,7 +82,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="paymentfee" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Payment Method Payment Fee</label>
+                    <label>Payment Method Fee</label>
                     <frontend_model>Mageprince\Paymentfee\Block\Adminhtml\System\Form\Field\PaymentFee</frontend_model>
                     <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                 </field>

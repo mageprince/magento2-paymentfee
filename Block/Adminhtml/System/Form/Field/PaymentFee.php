@@ -61,10 +61,10 @@ class PaymentFee extends AbstractFieldArray
 
         $this->addColumn(
             'payment_method',
-            ['label' => __('Payment Method'), 'renderer' => $this->_getPaymentRenderer()]
+            ['label' => __('Payment Method - Code'), 'renderer' => $this->_getPaymentRenderer()]
         );
 
-        $this->addColumn('fee', ['label' => __('Fee')]);
+        $this->addColumn('fee', ['label' => __('Fee Amount')]);
         $this->_addAfter       = false;
         $this->_addButtonLabel = __('Add Fee');
     }

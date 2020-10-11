@@ -12,39 +12,59 @@
 
 namespace Mageprince\Paymentfee\Block\Adminhtml\System\Form\Field;
 
-class Methods extends \Magento\Framework\View\Element\Html\Select
+use Magento\Framework\View\Element\Context;
+use Magento\Framework\View\Element\Html\Select;
+use Magento\Payment\Model\Config as PaymentModelConfig;
+use Magento\Payment\Model\Method\Factory as PaymentMethodFactory;
+use Magento\Store\Model\ScopeInterface;
+
+class Methods extends Select
 {
     /**
      * Payment methods cache
      *
      * @var array
      */
-    private $methods;
+    protected $methods;
 
     /**
-     * @var \Magento\Payment\Model\Config
+     * @var PaymentModelConfig
      */
     protected $paymentConfig;
 
     /**
+     * @var PaymentMethodFactory
+     */
+    protected $paymentMethodFactory;
+
+    /**
      * Methods constructor.
-     * @param \Magento\Framework\View\Element\Context $context
-     * @param \Magento\Payment\Model\Config $config
+     * @param Context $context
+     * @param PaymentModelConfig $config
+     * @param PaymentMethodFactory $paymentMethodFactory
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Context $context,
-        \Magento\Payment\Model\Config $config,
+        Context $context,
+        PaymentModelConfig $config,
+        PaymentMethodFactory $paymentMethodFactory,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->paymentConfig = $config;
+        $this->paymentMethodFactory = $paymentMethodFactory;
     }
 
     protected function _getPaymentMethods()
     {
         if ($this->methods === null) {
-            $this->methods = $this->paymentConfig->getActiveMethods();
+            $methods = [];
+            foreach ($this->_scopeConfig->getValue('payment', ScopeInterface::SCOPE_STORE, null) as $code => $data) {
+                if (isset($data['title'])) {
+                    $methods[$code] = $data['title'];
+                }
+            }
+            $this->methods = $methods;
         }
         return $this->methods;
     }
@@ -66,8 +86,8 @@ class Methods extends \Magento\Framework\View\Element\Html\Select
     public function _toHtml()
     {
         if (!$this->getOptions()) {
-            foreach ($this->_getPaymentMethods() as $paymentCode => $paymentModel) {
-                $paymentTitle = $this->_scopeConfig->getValue('payment/'.$paymentCode.'/title');
+            foreach ($this->_getPaymentMethods() as $paymentCode => $paymentTitle) {
+                $paymentTitle = $paymentTitle . ' - ' . $paymentCode;
                 $this->addOption($paymentCode, addslashes($paymentTitle));
             }
         }
