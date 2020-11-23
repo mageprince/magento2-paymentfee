@@ -110,6 +110,8 @@ class Fee extends Address\Total\AbstractTotal
         $total->setBasePaymentFee($baseFee);
         $quote->setPaymentFee($fee);
         $quote->setBasePaymentFee($baseFee);
+        $quote->setPaymentFeeTax($tax);
+        $quote->setBasePaymentFeeTax($baseTax);
         $total->setTotalAmount('tax', $total->getTotalAmount('tax') + $tax);
         $total->setBaseTotalAmount('tax', $total->getBaseTotalAmount('tax') + $baseTax);
 

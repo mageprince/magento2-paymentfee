@@ -25,15 +25,19 @@ class AfterOrder implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $quote = $observer->getQuote();
-        $extraFee = $quote->getPaymentFee();
-        $extraBaseFee = $quote->getBasePaymentFee();
-        if (!$extraFee || !$extraBaseFee) {
+        $paymentFee = $quote->getPaymentFee();
+        $basePaymentFee = $quote->getBasePaymentFee();
+        if (!$paymentFee || !$basePaymentFee) {
             return $this;
         }
-        
+
+        $paymentFeeTax = $quote->getPaymentFeeTax();
+        $basePaymentFeeTax = $quote->getBasePaymentFeeTax();
         $order = $observer->getOrder();
-        $order->setData('payment_fee', $extraFee);
-        $order->setData('base_payment_fee', $extraBaseFee);
+        $order->setData('payment_fee', $paymentFee);
+        $order->setData('base_payment_fee', $basePaymentFee);
+        $order->setData('fee_tax', $paymentFeeTax);
+        $order->setData('base_fee_tax', $basePaymentFeeTax);
 
         return $this;
     }

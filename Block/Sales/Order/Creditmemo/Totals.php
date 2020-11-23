@@ -62,31 +62,31 @@ class Totals extends Template
         return $this->getParentBlock()->getCreditmemo();
     }
 
+    /**
+     * @return $this
+     */
     public function initTotals()
     {
-        $this->getParentBlock();
-        $this->getCreditmemo();
-        $this->getSource();
+        $parent = $this->getParentBlock();
 
-        if (!$this->getSource()->getPaymentFee()) {
-            return $this;
-        }
+        $this->order = $parent->getOrder();
+        $this->source = $parent->getSource();
 
-        $paymentFee = $this->getSource()->getPaymentFee();
+        $feeAmount = $this->order->getPaymentFee();
+        $baseFeeAmount = $this->order->getBasePaymentFee();
 
-        if ($paymentFee > 0) {
-            $feeTitle = $this->helper->getTitle($this->getSource()->getStoreId());
-            $fee = new DataObject(
+        if ($feeAmount > 0) {
+            $feeTitle = $this->helper->getTitle($this->source->getStoreId());
+            $fee = new \Magento\Framework\DataObject(
                 [
                     'code' => 'payment_fee',
                     'strong' => false,
-                    'value' => $paymentFee,
-                    'base_value' => $this->getSource()->getBasePaymentFee(),
-                    'label' => $this->helper->getTitle(),
+                    'value' => $feeAmount,
+                    'base_value' => $baseFeeAmount,
+                    'label' => $feeTitle,
                 ]
             );
-
-            $this->getParentBlock()->addTotalBefore($fee, 'grand_total');
+            $parent->addTotalBefore($fee, 'grand_total');
         }
 
         return $this;

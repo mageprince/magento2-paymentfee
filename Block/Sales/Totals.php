@@ -61,25 +61,30 @@ class Totals extends Template
         return $this->_currency->getCurrencySymbol();
     }
 
+    /**
+     * @return $this
+     */
     public function initTotals()
     {
-        $this->getParentBlock();
-        $this->getOrder();
-        $this->getSource();
+        $parent = $this->getParentBlock();
 
-        $paymentFee = $this->getSource()->getPaymentFee();
+        $this->order = $parent->getOrder();
+        $this->source = $parent->getSource();
 
-        if ($paymentFee > 0) {
-            $feeTitle = $this->helper->getTitle($this->getSource()->getStoreId());
-            $total = new \Magento\Framework\DataObject(
+        $feeAmount = $this->order->getPaymentFee();
+        $baseFeeAmount = $this->order->getBasePaymentFee();
+
+        if ($feeAmount > 0) {
+            $feeTitle = $this->helper->getTitle($this->source->getStoreId());
+            $fee = new \Magento\Framework\DataObject(
                 [
-                    'code' => 'payment_fee',
-                    'value' => $paymentFee,
-                    'base_value' => $this->getSource()->getBasePaymentFee(),
+                    'code' => 'fee',
+                    'value' => $feeAmount,
+                    'base_value' => $baseFeeAmount,
                     'label' => $feeTitle,
                 ]
             );
-            $this->getParentBlock()->addTotalBefore($total, 'grand_total');
+            $parent->addTotalBefore($fee, 'grand_total');
         }
 
         return $this;

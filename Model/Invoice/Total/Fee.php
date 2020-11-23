@@ -23,16 +23,15 @@ class Fee extends AbstractTotal
      */
     public function collect(Invoice $invoice)
     {
-        $invoice->setPaymentFee(0);
-        $invoice->setBasePaymentFee(0);
-
-        $fee = $invoice->getOrder()->getPaymentFee();
-        $invoice->setPaymentFee($fee);
-        $baseFee = $invoice->getOrder()->getBasePaymentFee();
-        $invoice->setBasePaymentFee($baseFee);
-
-        $invoice->setGrandTotal($invoice->getGrandTotal() + $fee);
-        $invoice->setBaseGrandTotal($invoice->getBaseGrandTotal() + $baseFee);
+        $order = $invoice->getOrder();
+        $feeAmount = $order->getPaymentFee();
+        $baseFeeAmount = $order->getBasePaymentFee();
+        $feeTaxAmount = $order->getPaymentFeeTax();
+        $baseFeeTaxAmount = $order->getBasePaymentFeeTax();
+        $invoice->setGrandTotal($invoice->getGrandTotal() + $feeAmount + $feeTaxAmount);
+        $invoice->setBaseGrandTotal($invoice->getBaseGrandTotal() + $baseFeeAmount + $baseFeeTaxAmount);
+        $invoice->setTaxAmount($invoice->getTaxAmount() + $feeTaxAmount);
+        $invoice->setBaseTaxAmount($invoice->getBaseTaxAmount() + $baseFeeTaxAmount);
 
         return $this;
     }

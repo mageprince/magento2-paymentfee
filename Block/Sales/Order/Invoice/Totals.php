@@ -49,40 +49,30 @@ class Totals extends Template
         parent::__construct($context, $data);
     }
 
-    public function getSource()
-    {
-        return $this->getParentBlock()->getSource();
-    }
-
-    public function getInvoice()
-    {
-        return $this->getParentBlock()->getInvoice();
-    }
-
+    /**
+     * @return $this
+     */
     public function initTotals()
     {
-        $this->getParentBlock();
-        $this->getInvoice();
-        $this->getSource();
+        $parent = $this->getParentBlock();
 
-        if (!$this->getSource()->getPaymentFee()) {
-            return $this;
-        }
+        $this->order = $parent->getOrder();
+        $this->source = $parent->getSource();
 
-        $paymentFee = $this->getSource()->getPaymentFee();
+        $feeAmount = $this->order->getPaymentFee();
+        $baseFeeAmount = $this->order->getBasePaymentFee();
 
-        if ($paymentFee > 0) {
-            $feeTitle = $this->helper->getTitle($this->getSource()->getStoreId());
-            $total = new DataObject(
+        if ($feeAmount > 0) {
+            $feeTitle = $this->helper->getTitle($this->source->getStoreId());
+            $fee = new \Magento\Framework\DataObject(
                 [
                     'code' => 'payment_fee',
-                    'value' => $paymentFee,
-                    'base_value' => $this->getSource()->getBasePaymentFee(),
+                    'value' => $feeAmount,
+                    'base_value' => $baseFeeAmount,
                     'label' => $feeTitle,
                 ]
             );
-
-            $this->getParentBlock()->addTotalBefore($total, 'grand_total');
+            $parent->addTotalBefore($fee, 'grand_total');
         }
 
         return $this;

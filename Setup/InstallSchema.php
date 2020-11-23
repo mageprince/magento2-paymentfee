@@ -12,35 +12,30 @@
 
 namespace Mageprince\Paymentfee\Setup;
 
-use Magento\Framework\DB\Ddl\Table;
-use Magento\Framework\Setup\UpgradeSchemaInterface;
-use Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\DB\Ddl\Table;
 
-class UpgradeSchema implements UpgradeSchemaInterface
+class InstallSchema implements InstallSchemaInterface
 {
     /**
-     * Upgrades DB schema for a module
-     *
      * @param SchemaSetupInterface $setup
      * @param ModuleContextInterface $context
-     * @return void
      */
-    public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
-        if (version_compare($context->getVersion(), '2.0.4', '<')) {
-            $this->addPaymentFeeTaxColumns($setup);
-        }
+        $setup->startSetup();
+        $this->addPaymentFeeColumns($setup);
+        $setup->endSetup();
     }
 
     /**
-     * Create payment fee tax columns
-     * @param $setup
+     * Add payment fee columns
+     * @param SchemaSetupInterface $setup
      */
-    public function addPaymentFeeTaxColumns($setup)
+    public function addPaymentFeeColumns($setup)
     {
-        $setup->startSetup();
-
         $quoteTable = 'quote';
         $quoteAddressTable = 'quote_address';
         $orderTable = 'sales_order';
@@ -50,133 +45,131 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($quoteTable),
-                'payment_fee_tax',
+                'payment_fee',
                 [
                     'type' => Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
                     'default' => '0.0000',
-                    'comment' => 'Payment Fee Tax'
+                    'comment' => 'Payment Fee'
+                ]
+            );
+
+        $setup->getConnection()
+            ->addColumn(
+                $setup->getTable($quoteAddressTable),
+                'payment_fee',
+                [
+                    'type' => Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'Payment Fee'
+                ]
+            );
+
+        $setup->getConnection()
+            ->addColumn(
+                $setup->getTable($quoteAddressTable),
+                'base_payment_fee',
+                [
+                    'type' => Table::TYPE_DECIMAL,
+                    'nullable' => true,
+                    'length' => '12,4',
+                    'default' => '0.0000',
+                    'comment' => 'Base Payment Fee'
                 ]
             );
 
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($quoteTable),
-                'base_payment_fee_tax',
+                'base_payment_fee',
                 [
                     'type' => Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
                     'default' => '0.0000',
-                    'comment' => 'Base Payment Fee Tax'
-                ]
-            );
-
-        $setup->getConnection()
-            ->addColumn(
-                $setup->getTable($quoteAddressTable),
-                'payment_fee_tax',
-                [
-                    'type' => Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'default' => '0.0000',
-                    'comment' => 'Payment Fee Tax'
-                ]
-            );
-
-        $setup->getConnection()
-            ->addColumn(
-                $setup->getTable($quoteAddressTable),
-                'base_payment_fee_tax',
-                [
-                    'type' => Table::TYPE_DECIMAL,
-                    'nullable' => true,
-                    'length' => '12,4',
-                    'default' => '0.0000',
-                    'comment' => 'Base Payment Fee Tax'
+                    'comment' => 'Base Payment Fee'
                 ]
             );
 
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($orderTable),
-                'payment_fee_tax',
+                'payment_fee',
                 [
                     'type' => Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
                     'default' => '0.0000',
-                    'comment' => 'Payment Fee Tax'
+                    'comment' => 'Payment Fee'
                 ]
             );
 
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($orderTable),
-                'base_payment_fee_tax',
+                'base_payment_fee',
                 [
                     'type' => Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
                     'default' => '0.0000',
-                    'comment' => 'Base Payment Fee Tax'
+                    'comment' => 'Base Payment Fee'
                 ]
             );
 
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($invoiceTable),
-                'payment_fee_tax',
+                'payment_fee',
                 [
                     'type' => Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
                     'default' => '0.0000',
-                    'comment' => 'Payment Fee Tax'
+                    'comment' => 'Payment Fee'
                 ]
             );
 
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($invoiceTable),
-                'base_payment_fee_tax',
+                'base_payment_fee',
                 [
                     'type' => Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
                     'default' => '0.0000',
-                    'comment' => 'Base Payment Fee Tax'
+                    'comment' => 'Base Payment Fee'
                 ]
             );
 
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($creditmemoTable),
-                'payment_fee_tax',
+                'payment_fee',
                 [
                     'type' => Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
                     'default' => '0.0000',
-                    'comment' => 'Payment Fee Tax'
+                    'comment' => 'Payment Fee'
                 ]
             );
 
         $setup->getConnection()
             ->addColumn(
                 $setup->getTable($creditmemoTable),
-                'base_payment_fee_tax',
+                'base_payment_fee',
                 [
                     'type' => Table::TYPE_DECIMAL,
                     'nullable' => true,
                     'length' => '12,4',
                     'default' => '0.0000',
-                    'comment' => 'Base Payment Fee Tax'
+                    'comment' => 'Base Payment Fee'
                 ]
             );
-
-        $setup->endSetup();
     }
 }
