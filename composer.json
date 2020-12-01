@@ -1,5 +1,5 @@
 {
-  "name": "prince/magento2-paymentfee",
+  "name": "mageprince/magento2-paymentfee",
   "description": "Magento 2 Add Payment Fee To Order",
   "require": {
     "magento/module-store": ">100.0",
