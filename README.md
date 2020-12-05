@@ -19,6 +19,7 @@ New Features
 <li>Multi-currency support</li>
 <li>Support tax calculation on the payment fee</li>
 <li>Allow admin to select tax class for the payment fee</li>
+<li>Allow admin to select tax display type(Incl.,Excl.,both)</li>
 <li>Customer group restrictions</li>
 <li>Admin can set the sort order of payment fee</li>
 <li>Calculate discount or shipping amount in subtotal</li>

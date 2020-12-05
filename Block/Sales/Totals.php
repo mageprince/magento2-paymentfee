@@ -12,9 +12,8 @@
 
 namespace Mageprince\Paymentfee\Block\Sales;
 
-use Magento\Directory\Model\Currency;
+use Magento\Framework\DataObjectFactory;
 use Magento\Framework\View\Element\Template;
-use Magento\Framework\View\Element\Template\Context;
 use Mageprince\Paymentfee\Helper\Data;
 
 class Totals extends Template
@@ -23,43 +22,38 @@ class Totals extends Template
      * @var Data
      */
     protected $helper;
-   
-    /**
-     * @var Currency
-     */
-    protected $_currency;
 
     /**
-     * @param Context $context
+     * @var DataObjectFactory
+     */
+    protected $dataObjectFactory;
+
+    /**
+     * Totals constructor.
+     * @param Template\Context $context
      * @param Data $helper
-     * @param Currency $currency
+     * @param DataObjectFactory $dataObjectFactory
      * @param array $data
      */
     public function __construct(
-        Context $context,
+        Template\Context $context,
         Data $helper,
-        Currency $currency,
+        DataObjectFactory $dataObjectFactory,
         array $data = []
     ) {
         $this->helper = $helper;
-        $this->_currency = $currency;
+        $this->dataObjectFactory = $dataObjectFactory;
         parent::__construct($context, $data);
     }
 
-    public function getOrder()
-    {
-        return $this->getParentBlock()->getOrder();
-    }
-
+    /**
+     * @return mixed
+     */
     public function getSource()
     {
         return $this->getParentBlock()->getSource();
     }
 
-    public function getCurrencySymbol()
-    {
-        return $this->_currency->getCurrencySymbol();
-    }
 
     /**
      * @return $this
@@ -67,24 +61,49 @@ class Totals extends Template
     public function initTotals()
     {
         $parent = $this->getParentBlock();
+        $source = $this->getSource();
 
-        $this->order = $parent->getOrder();
-        $this->source = $parent->getSource();
+        if ($source->getPaymentFee() == 0) {
+            return $this;
+        }
 
-        $feeAmount = $this->order->getPaymentFee();
-        $baseFeeAmount = $this->order->getBasePaymentFee();
+        $paymentFeeTitle = $this->helper->getTitle($source->getStoreId());
 
-        if ($feeAmount > 0) {
-            $feeTitle = $this->helper->getTitle($this->source->getStoreId());
-            $fee = new \Magento\Framework\DataObject(
-                [
-                    'code' => 'fee',
-                    'value' => $feeAmount,
-                    'base_value' => $baseFeeAmount,
-                    'label' => $feeTitle,
-                ]
+        $paymentFeeExclTax = $source->getPaymentFee();
+        $paymentFeeExclTaxTotal = [
+            'code' => 'payment_fee',
+            'strong' => false,
+            'value' => $paymentFeeExclTax,
+            'label' => $paymentFeeTitle,
+        ];
+
+        $paymentFeeInclTax = $paymentFeeExclTax + $source->getPaymentFeeTax();
+        $paymentFeeInclTaxTotal = [
+            'code' => 'payment_fee_incl_tax',
+            'strong' => false,
+            'value' => $paymentFeeInclTax,
+            'label' => $paymentFeeTitle,
+        ];
+
+        if ($this->helper->displayExclTax() && $this->helper->displayInclTax()) {
+            $inclTxt = __('Incl. Tax');
+            $exclTxt = __('Excl. Tax');
+            $paymentFeeInclTaxTotal['label'] .= ' ' . $inclTxt;
+            $paymentFeeExclTaxTotal['label'] .= ' ' . $exclTxt;
+        }
+
+        if ($this->helper->displayExclTax()) {
+            $parent->addTotal(
+                $this->dataObjectFactory->create()->setData($paymentFeeExclTaxTotal),
+                'shipping'
             );
-            $parent->addTotalBefore($fee, 'grand_total');
+        }
+
+        if ($this->helper->displayInclTax()) {
+            $parent->addTotal(
+                $this->dataObjectFactory->create()->setData($paymentFeeInclTaxTotal),
+                'shipping'
+            );
         }
 
         return $this;

@@ -94,7 +94,7 @@ class Data extends AbstractHelper
      */
     public function isEnable()
     {
-        return $this->getConfig(ConfigData::MODULE_STATUS_XML_PATH);
+        return $this->scopeConfig->isSetFlag(ConfigData::MODULE_STATUS_XML_PATH);
     }
 
     /**
@@ -164,9 +164,9 @@ class Data extends AbstractHelper
      * Get is refund payment fee
      * @return bool
      */
-    public function isRefund()
+    public function isRefund($storeId)
     {
-        return (bool) $this->getConfig(ConfigData::PAYMENTFEE_IS_REFUND_XML_PATH);
+        return (bool) $this->getConfig(ConfigData::PAYMENTFEE_IS_REFUND_XML_PATH, $storeId);
     }
 
     /**
@@ -248,7 +248,7 @@ class Data extends AbstractHelper
      */
     public function isTaxEnabled()
     {
-        return $this->getConfig(ConfigData::PAYMENTFEE_TAX_ENABLE_XML_PATH);
+        return $this->scopeConfig->isSetFlag(ConfigData::PAYMENTFEE_TAX_ENABLE_XML_PATH);
     }
 
     /**
@@ -258,6 +258,42 @@ class Data extends AbstractHelper
     public function getTaxClassId()
     {
         return $this->getConfig(ConfigData::PAYMENTFEE_TAX_CLASS_XML_PATH);
+    }
+
+    /**
+     * Get tax display type
+     * @return int
+     */
+    public function getTaxDisplay()
+    {
+        return $this->getConfig(ConfigData::PAYMENTFEE_TAX_DISPLAY_XML_PATH);
+    }
+
+    /**
+     * Check is incl. tax displayed
+     * @return bool
+     */
+    public function displayInclTax()
+    {
+        return in_array($this->getTaxDisplay(), [2,3]);
+    }
+
+    /**
+     * Check is excl. tax displayed
+     * @return bool
+     */
+    public function displayExclTax()
+    {
+        return in_array($this->getTaxDisplay(), [1,3]);
+    }
+
+    /**
+     * Check is tax suffix added
+     * @return bool
+     */
+    public function displaySuffix()
+    {
+        return ($this->getTaxDisplay() == 3);
     }
 
     /**

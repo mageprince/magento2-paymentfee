@@ -48,10 +48,10 @@ class ConfigChange implements ObserverInterface
      */
     public function execute(EventObserver $observer)
     {
-        $extraFeeParams = $this->request->getParam('groups');
-        $extraFeeSettings = $extraFeeParams['general']['fields'];
-        if (isset($extraFeeSettings['total_sortorder']['value'])) {
-            $totalsSortOrderVal = $extraFeeSettings['total_sortorder']['value'];
+        $paymentFeeParams = $this->request->getParam('groups');
+        $paymentFeeSettings = $paymentFeeParams['general']['fields'];
+        if (isset($paymentFeeSettings['total_sortorder']['value'])) {
+            $totalsSortOrderVal = $paymentFeeSettings['total_sortorder']['value'];
             $this->configWriter->save('sales/totals_sort/mageprince_paymentfee', $totalsSortOrderVal);
         }
         return $this;

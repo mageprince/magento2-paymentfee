@@ -4,7 +4,7 @@
  * MagePrince
  * Copyright (C) 2020 Mageprince <info@mageprince.com>
  *
- * @package Mageprince_Extrafee
+ * @package Mageprince_Paymentfee
  * @copyright Copyright (c) 2020 Mageprince (http://www.mageprince.com/)
  * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
  * @author MagePrince <info@mageprince.com>
@@ -50,21 +50,45 @@ class Fee extends DefaultTotal
     }
 
     /**
-     * Get fee amount
-     * @return float
+     * Add payment fee totals in sales PDF
+     * @return array
      */
-    public function getAmount()
+    public function getTotalsForDisplay()
     {
-        return $this->getOrder()->getPaymentFee();
-    }
+        $totals = [];
+        $paymentFee = $this->getSource()->getPaymentFee();
+        if ($paymentFee != 0) {
+            $paymentFeeTax = $this->getSource()->getPaymentFeeTax();
+            $amount = $this->getOrder()->formatPriceTxt($paymentFee);
+            $amountInclTax = $this->getOrder()->formatPriceTxt($paymentFee + $paymentFeeTax);
+            $defaultLabel = $this->helper->getTitle();
+            $fontSize = $this->getFontSize() ? $this->getFontSize() : 7;
 
-    /**
-     * Get fee title
-     * @return string
-     */
-    public function getTitle()
-    {
-        $storeId = $this->getOrder()->getStoreId();
-        return $this->helper->getTitle($storeId);
+            if ($this->helper->displayExclTax()) {
+                $label = $defaultLabel;
+                if ($this->helper->displaySuffix()) {
+                    $label .= ' ' . __('(Excl. Tax)');
+                }
+                $totals[] = [
+                    'amount' => $this->getAmountPrefix() . $amount,
+                    'label' => $label . ':',
+                    'font_size' => $fontSize
+                ];
+            }
+
+            if ($this->helper->displayInclTax()) {
+                $label = $defaultLabel;
+                if ($this->helper->displaySuffix()) {
+                    $label .= ' ' . __('(Incl. Tax)');
+                }
+                $totals[] = [
+                    'amount' => $this->getAmountPrefix() . $amountInclTax,
+                    'label' => $label . ':',
+                    'font_size' => $fontSize
+                ];
+            }
+        }
+
+        return $totals;
     }
 }

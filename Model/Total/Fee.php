@@ -68,6 +68,8 @@ class Fee extends Address\Total\AbstractTotal
 
         $total->setTotalAmount($this->getCode(), 0);
         $total->setBaseTotalAmount($this->getCode(), 0);
+        $total->setTotalAmount('payment_fee_tax', 0);
+        $total->setBaseTotalAmount('payment_fee_tax', 0);
 
         if (!count($shippingAssignment->getItems())) {
             return $this;
@@ -106,14 +108,18 @@ class Fee extends Address\Total\AbstractTotal
 
         $total->setTotalAmount($this->getCode(), $fee);
         $total->setBaseTotalAmount($this->getCode(), $baseFee);
+
         $total->setPaymentFee($fee);
         $total->setBasePaymentFee($baseFee);
+        $total->setBasePaymentFeeTax($baseTax);
+        $total->setPaymentFeeTax($tax);
+        $total->addBaseTotalAmount('tax', $baseTax);
+        $total->addTotalAmount('tax', $tax);
+
         $quote->setPaymentFee($fee);
         $quote->setBasePaymentFee($baseFee);
         $quote->setPaymentFeeTax($tax);
         $quote->setBasePaymentFeeTax($baseTax);
-        $total->setTotalAmount('tax', $total->getTotalAmount('tax') + $tax);
-        $total->setBaseTotalAmount('tax', $total->getBaseTotalAmount('tax') + $baseTax);
 
         return $this;
     }
@@ -125,19 +131,34 @@ class Fee extends Address\Total\AbstractTotal
      */
     public function fetch(Quote $quote, Total $total)
     {
-        $result = [];
-        $baseFee = $this->calculator->calculate($quote);
-        $fee = $this->helper->getStoreFee($baseFee, $quote);
+        $fee = $total->getPaymentFee();
+        $address = $this->getAddressFromQuote($quote);
 
-        if ($fee > 0) {
-            $result = [
+        $result = [
+            [
                 'code' => $this->getCode(),
-                'title' => $this->getLabel(),
+                'title' => __($this->helper->getTitle()),
                 'value' => $fee
+            ]
+        ];
+
+        if ($this->helper->isTaxEnabled() && $this->helper->displayInclTax()) {
+            $result [] = [
+                'code' => 'payment_fee_incl_tax',
+                'value' => $fee + $address->getPaymentFeeTax()
             ];
         }
 
         return $result;
+    }
+
+    /**
+     * @param Quote $quote
+     * @return Address
+     */
+    private function getAddressFromQuote(Quote $quote)
+    {
+        return $quote->isVirtual() ? $quote->getBillingAddress() : $quote->getShippingAddress();
     }
 
     /**

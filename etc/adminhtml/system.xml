@@ -105,6 +105,13 @@
                         <field id="paymentfee/tax/enable">1</field>
                     </depends>
                 </field>
+                <field id="display" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Payment Fee</label>
+                    <source_model>Magento\Tax\Model\System\Config\Source\Tax\Display\Type</source_model>
+                    <depends>
+                        <field id="paymentfee/tax/enable">1</field>
+                    </depends>
+                </field>
             </group>
         </section>
     </system>

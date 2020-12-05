@@ -24,24 +24,26 @@ define(
         'use strict';
 
         return function (isLoading, payment) {
-            var serviceUrl = urlBuilder.build('paymentfee/calculate/paymentfee');
-            return storage.post(
-                serviceUrl,
-                JSON.stringify({payment: payment})
-            ).done(
-                function(response) {
-                    if(response) {
-                        var deferred = $.Deferred();
-                        isLoading(false);
-                        getTotalsAction([], deferred);
+            var $isEnabled = window.checkoutConfig.mageprince_paymentfee.isEnabled;
+            if($isEnabled != 0) {
+                var serviceUrl = urlBuilder.build('paymentfee/calculate/paymentfee');
+                return storage.post(
+                    serviceUrl,
+                    JSON.stringify({payment: payment})
+                ).done(
+                    function (response) {
+                        if (response) {
+                            var deferred = $.Deferred();
+                            isLoading(false);
+                            getTotalsAction([], deferred);
+                        }
                     }
-                }
-            ).fail(
-                function (response) {
-                    isLoading(false);
-                    //var error = JSON.parse(response.responseText);
-                }
-            );
+                ).fail(
+                    function (response) {
+                        isLoading(false);
+                    }
+                );
+            }
         }
     }
 );

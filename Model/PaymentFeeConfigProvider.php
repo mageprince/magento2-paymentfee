@@ -17,7 +17,7 @@ use Magento\Checkout\Model\Session;
 use Mageprince\Paymentfee\Helper\Data;
 use Mageprince\Paymentfee\Model\Calculation\Calculator\CalculatorInterface;
 
-class ExtraFeeConfigProvider implements ConfigProviderInterface
+class PaymentFeeConfigProvider implements ConfigProviderInterface
 {
     /**
      * @var Data
@@ -40,7 +40,7 @@ class ExtraFeeConfigProvider implements ConfigProviderInterface
     protected $calculator;
 
     /**
-     * ExtraFeeConfigProvider constructor.
+     * PaymentFeeConfigProvider constructor.
      * @param Data $helper
      * @param Session $checkoutSession
      * @param CalculatorInterface $calculator
@@ -60,12 +60,24 @@ class ExtraFeeConfigProvider implements ConfigProviderInterface
      */
     public function getConfig()
     {
-        $extraFeeConfig = [];
-        $enabled = $this->helper->isEnable();
+        $displayExclTax = $this->helper->displayExclTax();
+        $displayInclTax = $this->helper->displayInclTax();
+
         $isDescription = $this->helper->isDescription();
         $description = $this->helper->getDescription();
-        $extraFeeConfig['paymentfee_title'] = $this->helper->getTitle();
-        $extraFeeConfig['paymentfee_description'] = ($enabled && $isDescription) ? $description : false;
-        return $extraFeeConfig;
+
+        $paymentFeeConfig = [
+            'mageprince_paymentfee' => [
+                'isEnabled' => $this->helper->isEnable(),
+                'title' => $this->helper->getTitle(),
+                'description' => $isDescription ? $description : false,
+                'isTaxEnabled' => $this->helper->isTaxEnabled(),
+                'displayBoth' => ($displayExclTax && $displayInclTax),
+                'displayInclTax' => $this->helper->displayInclTax(),
+                'displayExclTax' => $this->helper->displayExclTax()
+            ]
+        ];
+
+        return $paymentFeeConfig;
     }
 }

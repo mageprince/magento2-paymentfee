@@ -44,18 +44,28 @@ class Fee extends AbstractTotal
     {
         $creditmemo->setPaymentFee(0);
         $creditmemo->setBasePaymentFee(0);
+        $creditmemo->setPaymentFeeTax(0);
+        $creditmemo->setBasePaymentFeeTax(0);
 
-        if (!$this->paymentHelper->isRefund()) {
+        $storeId = $creditmemo->getOrder()->getStoreId();
+        if (!$this->paymentHelper->isRefund($storeId)) {
             return $this;
         }
 
-        $fee = $creditmemo->getOrder()->getPaymentFee();
-        $creditmemo->setPaymentFee($fee);
-        $baseFee = $creditmemo->getOrder()->getBasePaymentFee();
-        $creditmemo->setBasePaymentFee($baseFee);
+        $order = $creditmemo->getOrder();
+        $paymentFee = $order->getPaymentFee();
+        $basePaymentFee = $order->getBasePaymentFee();
+        $paymentFeeTax = $order->getPaymentFeeTax();
+        $basePaymentFeeTax = $order->getBasePaymentFeeTax();
 
-        $creditmemo->setGrandTotal($creditmemo->getGrandTotal() + $fee);
-        $creditmemo->setBaseGrandTotal($creditmemo->getBaseGrandTotal() + $baseFee);
+        if ($paymentFee != 0) {
+            $creditmemo->setPaymentFee($paymentFee);
+            $creditmemo->setBasePaymentFee($basePaymentFee);
+            $creditmemo->setPaymentFeeTax($paymentFeeTax);
+            $creditmemo->setBasePaymentFeeTax($basePaymentFeeTax);
+            $creditmemo->setGrandTotal($creditmemo->getGrandTotal() + $paymentFee);
+            $creditmemo->setBaseGrandTotal($creditmemo->getBaseGrandTotal() + $basePaymentFee);
+        }
 
         return $this;
     }

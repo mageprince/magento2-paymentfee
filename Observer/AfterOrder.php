@@ -36,8 +36,8 @@ class AfterOrder implements ObserverInterface
         $order = $observer->getOrder();
         $order->setData('payment_fee', $paymentFee);
         $order->setData('base_payment_fee', $basePaymentFee);
-        $order->setData('fee_tax', $paymentFeeTax);
-        $order->setData('base_fee_tax', $basePaymentFeeTax);
+        $order->setData('payment_fee_tax', $paymentFeeTax);
+        $order->setData('base_payment_fee_tax', $basePaymentFeeTax);
 
         return $this;
     }

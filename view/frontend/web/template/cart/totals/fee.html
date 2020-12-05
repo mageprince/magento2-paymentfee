@@ -1,11 +1,57 @@
 <!-- ko if: isDisplayed() -->
-<tr class="totals opc-block-summary paymentfee excl">
+<!-- ko if: isTaxEnabled -->
+<!-- ko if: displayBoth -->
+<tr class="totals paymentfee excl">
     <th class="mark" scope="row">
-        <span class="label" data-bind="i18n: paymentFeeTitle"></span>
-        <span class="value" data-bind="i18n: paymentFeeDescription"></span>
+        <span class="label" data-bind="text: title + ' Excl. Tax'"></span>
+    </th>
+    <td class="amount">
+        <span class="price" data-bind="text: getPaymentFeeExclTax(), attr: {'data-th': title}"></span>
+    </td>
+</tr>
+<tr class="totals paymentfee incl">
+    <th class="mark" scope="row">
+        <span class="label" data-bind="text: title + ' Incl. Tax'"></span>
+    </th>
+    <td class="amount">
+        <span class="price" data-bind="text: getPaymentFeeInclTax(), attr: {'data-th': title}"></span>
+    </td>
+</tr>
+<!-- /ko -->
+<!-- ko ifnot: displayBoth -->
+<!-- ko if: displayExclTax -->
+<tr class="totals paymentfee excl">
+    <th class="mark" scope="row">
+        <span class="label" data-bind="text: title"></span>
+        <span class="value" data-bind="i18n: description"></span>
+    </th>
+    <td class="amount">
+        <span class="price" data-bind="text: getPaymentFeeExclTax(), attr: {'data-th': title}"></span>
+    </td>
+</tr>
+<!-- /ko -->
+<!-- ko if: displayInclTax -->
+<tr class="totals paymentfee incl">
+    <th class="mark" scope="row">
+        <span class="label" data-bind="text: title"></span>
+        <span class="value" data-bind="i18n: description"></span>
+    </th>
+    <td class="amount">
+        <span class="price" data-bind="text: getPaymentFeeInclTax(), attr: {'data-th': title}"></span>
+    </td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko ifnot: isTaxEnabled -->
+<tr class="totals paymentfee">
+    <th class="mark" scope="row">
+        <span class="label" data-bind="text: title"></span>
+        <span class="value" data-bind="i18n: description"></span>
     </th>
     <td class="amount">
         <span class="price" data-bind="text: getValue(), attr: {'data-th': title}"></span>
     </td>
 </tr>
+<!-- /ko -->
 <!-- /ko -->

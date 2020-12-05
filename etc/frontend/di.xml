@@ -14,7 +14,7 @@
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="checkout_paymentfee" xsi:type="object">Mageprince\Paymentfee\Model\ExtraFeeConfigProvider</item>
+                <item name="checkout_paymentfee" xsi:type="object">Mageprince\Paymentfee\Model\PaymentFeeConfigProvider</item>
             </argument>
         </arguments>
     </type>

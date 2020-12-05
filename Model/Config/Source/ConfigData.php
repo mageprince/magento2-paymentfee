@@ -83,4 +83,9 @@ class ConfigData
      * Payment fee tax class config path
      */
     const PAYMENTFEE_TAX_CLASS_XML_PATH = 'paymentfee/tax/tax_class';
+
+    /**
+     * Payment fee tax class display config path
+     */
+    const PAYMENTFEE_TAX_DISPLAY_XML_PATH = 'paymentfee/tax/display';
 }

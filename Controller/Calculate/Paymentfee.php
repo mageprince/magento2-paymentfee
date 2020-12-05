@@ -14,8 +14,8 @@ namespace Mageprince\Paymentfee\Controller\Calculate;
 
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\JsonFactory;
-use Magento\Framework\Json\Helper\Data as FeeHelper;
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Quote\Api\CartRepositoryInterface;
 
 class Paymentfee extends \Magento\Framework\App\Action\Action
@@ -31,35 +31,35 @@ class Paymentfee extends \Magento\Framework\App\Action\Action
     protected $_resultJson;
 
     /**
-     * @var FeeHelper
-     */
-    protected $_helper;
-
-    /**
      * @var CartRepositoryInterface
      */
     protected $quoteRepository;
 
     /**
+     * @var Json
+     */
+    protected $json;
+
+    /**
      * Paymentfee constructor.
      * @param Context $context
      * @param CheckoutSession $checkoutSession
-     * @param FeeHelper $helper
      * @param JsonFactory $resultJson
      * @param CartRepositoryInterface $quoteRepository
+     * @param Json $json
      */
     public function __construct(
         Context $context,
         CheckoutSession $checkoutSession,
-        FeeHelper $helper,
         JsonFactory $resultJson,
-        CartRepositoryInterface $quoteRepository
+        CartRepositoryInterface $quoteRepository,
+        Json $json
     ) {
         parent::__construct($context);
         $this->_checkoutSession = $checkoutSession;
-        $this->_helper = $helper;
         $this->_resultJson = $resultJson;
         $this->quoteRepository = $quoteRepository;
+        $this->json = $json;
     }
 
     /**
@@ -72,7 +72,7 @@ class Paymentfee extends \Magento\Framework\App\Action\Action
         try {
             $this->quoteRepository->get($this->_checkoutSession->getQuoteId());
             $quote = $this->_checkoutSession->getQuote();
-            $payment = $this->_helper->jsonDecode($this->getRequest()->getContent());
+            $payment = $this->json->unserialize($this->getRequest()->getContent());
             $this->_checkoutSession->getQuote()->getPayment()->setMethod($payment['payment']);
             $this->quoteRepository->save($quote->collectTotals());
         } catch (\Exception $e) {

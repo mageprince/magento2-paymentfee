@@ -12,9 +12,8 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="invoice_totals">
-            <block class="Mageprince\Paymentfee\Block\Sales\Order\Invoice\Totals" name="mageprince_paymentfee">
-            </block>
-        </referenceBlock>
+        <referenceContainer name="invoice_totals">
+            <block class="Mageprince\Paymentfee\Block\Sales\Totals" name="mageprince_paymentfee"/>
+        </referenceContainer>
     </body>
 </page>

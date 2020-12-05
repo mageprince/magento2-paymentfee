@@ -32,6 +32,7 @@
             <tax>
                 <enable>0</enable>
                 <tax_class>2</tax_class>
+                <display>2</display>
             </tax>
         </paymentfee>
         <sales>

@@ -24,7 +24,7 @@ class AddPaymentfeeItem implements ObserverInterface
     private $checkoutSession;
 
     /**
-     * AddExtrafeeItem constructor.
+     * AddPaymentfeeItem constructor.
      * @param CheckoutSession $checkoutSession
      */
     public function __construct(CheckoutSession $checkoutSession)
