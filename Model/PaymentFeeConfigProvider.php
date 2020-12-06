@@ -13,9 +13,7 @@
 namespace Mageprince\Paymentfee\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
-use Magento\Checkout\Model\Session;
 use Mageprince\Paymentfee\Helper\Data;
-use Mageprince\Paymentfee\Model\Calculation\Calculator\CalculatorInterface;
 
 class PaymentFeeConfigProvider implements ConfigProviderInterface
 {
@@ -25,34 +23,11 @@ class PaymentFeeConfigProvider implements ConfigProviderInterface
     protected $helper;
 
     /**
-     * @var Session
-     */
-    protected $checkoutSession;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @var CalculatorInterface
-     */
-    protected $calculator;
-
-    /**
      * PaymentFeeConfigProvider constructor.
      * @param Data $helper
-     * @param Session $checkoutSession
-     * @param CalculatorInterface $calculator
      */
-    public function __construct(
-        Data $helper,
-        Session $checkoutSession,
-        CalculatorInterface $calculator
-    ) {
+    public function __construct(Data $helper) {
         $this->helper = $helper;
-        $this->checkoutSession = $checkoutSession;
-        $this->calculator = $calculator;
     }
 
     /**
