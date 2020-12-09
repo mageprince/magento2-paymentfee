@@ -10,9 +10,9 @@ define(
         var isLoading = ko.observable(false);
 
         return function (paymentMethod) {
+            quote.paymentMethod(paymentMethod);
             var $isEnabled = window.checkoutConfig.mageprince_paymentfee.isEnabled;
             if($isEnabled != 0) {
-                quote.paymentMethod(paymentMethod);
                 totals(isLoading, paymentMethod['method']);
             }
         }
