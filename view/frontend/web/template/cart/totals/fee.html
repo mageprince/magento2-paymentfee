@@ -20,7 +20,7 @@
 <!-- /ko -->
 <!-- ko ifnot: displayBoth -->
 <!-- ko if: displayExclTax -->
-<tr class="totals paymentfee excl">
+<tr class="totals opc-block-summary paymentfee excl">
     <th class="mark" scope="row">
         <span class="label" data-bind="text: title"></span>
         <span class="value" data-bind="i18n: description"></span>
@@ -31,7 +31,7 @@
 </tr>
 <!-- /ko -->
 <!-- ko if: displayInclTax -->
-<tr class="totals paymentfee incl">
+<tr class="totals opc-block-summary paymentfee incl">
     <th class="mark" scope="row">
         <span class="label" data-bind="text: title"></span>
         <span class="value" data-bind="i18n: description"></span>
@@ -44,7 +44,7 @@
 <!-- /ko -->
 <!-- /ko -->
 <!-- ko ifnot: isTaxEnabled -->
-<tr class="totals paymentfee">
+<tr class="totals opc-block-summary paymentfee">
     <th class="mark" scope="row">
         <span class="label" data-bind="text: title"></span>
         <span class="value" data-bind="i18n: description"></span>
