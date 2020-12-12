@@ -27,9 +27,6 @@
                                                        <item name="mageprince_paymentfee" xsi:type="array">
                                                             <item name="component"  xsi:type="string">Mageprince_Paymentfee/js/view/cart/totals/fee</item>
                                                             <item name="sortOrder" xsi:type="string">20</item>
-                                                            <item name="config" xsi:type="array">
-                                                                 <item name="title" xsi:type="string">Payment Fee</item>
-                                                            </item>
                                                         </item>
                                                     </item>
                                                 </item>
