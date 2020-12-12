@@ -46,6 +46,10 @@ Features
 <li>Admin can disable payment fees on the maximum order amount by adding the max order amount from the admin configuration</li>
 </ul>
 
+# Demo
+
+<b><a href="http://demo2.mageprince.com/">Frontend</a>   |   <a href="http://demo2.mageprince.com/admin">Backend</a></b>
+
 # Installation Instruction
 
 * Copy the content of the repo to the Magento 2 `app/code/Mageprince/Paymentfee`
