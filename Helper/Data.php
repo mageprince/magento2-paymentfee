@@ -94,7 +94,10 @@ class Data extends AbstractHelper
      */
     public function isEnable()
     {
-        return $this->scopeConfig->isSetFlag(ConfigData::MODULE_STATUS_XML_PATH);
+        return $this->scopeConfig->isSetFlag(
+            ConfigData::MODULE_STATUS_XML_PATH,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -246,9 +249,13 @@ class Data extends AbstractHelper
      * Check is tax enabled
      * @return bool
      */
-    public function isTaxEnabled()
+    public function isTaxEnabled($storeId = null)
     {
-        return $this->scopeConfig->isSetFlag(ConfigData::PAYMENTFEE_TAX_ENABLE_XML_PATH);
+        return $this->scopeConfig->isSetFlag(
+            ConfigData::PAYMENTFEE_TAX_ENABLE_XML_PATH,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
     }
 
     /**
@@ -264,27 +271,27 @@ class Data extends AbstractHelper
      * Get tax display type
      * @return int
      */
-    public function getTaxDisplay()
+    public function getTaxDisplay($storeId = null)
     {
-        return $this->getConfig(ConfigData::PAYMENTFEE_TAX_DISPLAY_XML_PATH);
+        return $this->getConfig(ConfigData::PAYMENTFEE_TAX_DISPLAY_XML_PATH, $storeId);
     }
 
     /**
      * Check is incl. tax displayed
      * @return bool
      */
-    public function displayInclTax()
+    public function displayInclTax($storeId = null)
     {
-        return in_array($this->getTaxDisplay(), [2,3]);
+        return in_array($this->getTaxDisplay($storeId), [2,3]);
     }
 
     /**
      * Check is excl. tax displayed
      * @return bool
      */
-    public function displayExclTax()
+    public function displayExclTax($storeId = null)
     {
-        return in_array($this->getTaxDisplay(), [1,3]);
+        return in_array($this->getTaxDisplay($storeId), [1,3]);
     }
 
     /**

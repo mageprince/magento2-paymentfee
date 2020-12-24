@@ -44,8 +44,10 @@ class Fee extends AbstractTotal
             $invoice->setBasePaymentFee($basePaymentFee);
             $invoice->setPaymentFeeTax($paymentFeeTax);
             $invoice->setBasePaymentFeeTax($basePaymentFeeTax);
-            $invoice->setGrandTotal($invoice->getGrandTotal() + $paymentFee);
-            $invoice->setBaseGrandTotal($invoice->getBaseGrandTotal() + $basePaymentFee);
+            $invoice->setGrandTotal($invoice->getGrandTotal() + $paymentFee + $paymentFeeTax);
+            $invoice->setBaseGrandTotal($invoice->getBaseGrandTotal() + $basePaymentFee + $basePaymentFeeTax);
+            $invoice->setTaxAmount($invoice->getTaxAmount() + $paymentFeeTax);
+            $invoice->setBaseTaxAmount($invoice->getBaseTaxAmount() + $basePaymentFeeTax);
         }
 
         return $this;

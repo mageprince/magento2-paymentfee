@@ -62,44 +62,49 @@ class Totals extends Template
     {
         $parent = $this->getParentBlock();
         $source = $this->getSource();
+        $storeId = $source->getStoreId();
 
         if ($source->getPaymentFee() == 0) {
             return $this;
         }
 
-        $paymentFeeTitle = $this->helper->getTitle($source->getStoreId());
+        $paymentFeeTitle = $this->helper->getTitle($storeId);
 
         $paymentFeeExclTax = $source->getPaymentFee();
+        $basePaymentFeeExclTax = $source->getBasePaymentFee();
         $paymentFeeExclTaxTotal = [
             'code' => 'payment_fee',
             'strong' => false,
             'value' => $paymentFeeExclTax,
+            'base_value' => $basePaymentFeeExclTax,
             'label' => $paymentFeeTitle,
         ];
 
         $paymentFeeInclTax = $paymentFeeExclTax + $source->getPaymentFeeTax();
+        $basePaymentFeeInclTax = $basePaymentFeeExclTax + $source->getBasePaymentFeeTax();
         $paymentFeeInclTaxTotal = [
             'code' => 'payment_fee_incl_tax',
             'strong' => false,
             'value' => $paymentFeeInclTax,
+            'base_value' => $basePaymentFeeInclTax,
             'label' => $paymentFeeTitle,
         ];
 
-        if ($this->helper->displayExclTax() && $this->helper->displayInclTax()) {
+        if ($this->helper->displayExclTax($storeId) && $this->helper->displayInclTax($storeId)) {
             $inclTxt = __('Incl. Tax');
             $exclTxt = __('Excl. Tax');
             $paymentFeeInclTaxTotal['label'] .= ' ' . $inclTxt;
             $paymentFeeExclTaxTotal['label'] .= ' ' . $exclTxt;
         }
 
-        if ($this->helper->displayExclTax()) {
+        if ($this->helper->displayExclTax($storeId)) {
             $parent->addTotal(
                 $this->dataObjectFactory->create()->setData($paymentFeeExclTaxTotal),
                 'shipping'
             );
         }
 
-        if ($this->helper->displayInclTax()) {
+        if ($this->helper->displayInclTax($storeId)) {
             $parent->addTotal(
                 $this->dataObjectFactory->create()->setData($paymentFeeInclTaxTotal),
                 'shipping'
