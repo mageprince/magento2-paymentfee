@@ -74,16 +74,7 @@ If you encounter any problems or bugs, please <a href="https://github.com/magepr
 <img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/checkout_page_2.png" />
 
 <h3>Configuration</h3>
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/new_config_2.png" />
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/new_config_1.png" />
-
-<h3>Frontend - My Order</h3>
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/customer_order_invoice_creditmemo.png" />
-
-<h3>Sales Emails</h3>
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/sales_email.png" />
-
-<h3>Admin - Order, Invoice, CreditMemo</h3>
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/admin_order_invoice_creditmemo.png" />
+<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/paymentfee-config1.jpg" />
+<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/paymentfee-config2.jpg" />
 
 
