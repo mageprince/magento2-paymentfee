@@ -1,22 +1,19 @@
 {
   "name": "mageprince/magento2-paymentfee",
   "description": "Magento 2 Add Payment Fee To Order",
-  "require": {
-    "magento/module-store": ">100.0",
-    "magento/module-backend": ">100.0",
-    "magento/framework": ">100.0"
-  },
+  "homepage": "https://github.com/mageprince/magento2-paymentfee",
   "type": "magento2-module",
   "version": "2.1.2",
-  "license": [
-    "proprietary"
-  ],
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Mageprince",
       "email": "contact@mageprince.com"
     }
   ],
+  "support": {
+        "issues": "https://github.com/mageprince/magento2-paymentfee/issues"
+    },
   "autoload": {
     "files": [
         "registration.php"
