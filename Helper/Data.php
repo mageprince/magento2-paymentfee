@@ -28,7 +28,7 @@ class Data extends AbstractHelper
     /**
      * @var array
      */
-    public $methodFee = null;
+    protected $methodFee = [];
 
     /**
      * Session quote
@@ -176,19 +176,23 @@ class Data extends AbstractHelper
      * Get payment fees
      * @return array
      */
-    public function _getPaymentFee()
+    public function getPaymentFee()
     {
-        $paymentFees = $this->getConfig(ConfigData::PAYMENTFEE_AMOUNT_XML_PATH);
-        if ($paymentFees) {
-            $fees = $this->serialize->unserialize($paymentFees);
-            if (is_array($fees)) {
-                foreach ($fees as $fee) {
-                    $this->methodFee[$fee['payment_method']] = [
-                        'fee' => $fee['fee']
+        if (!$this->methodFee) {
+            $paymentFees = $this->getConfig(ConfigData::PAYMENTFEE_AMOUNT_XML_PATH);
+            if (is_string($paymentFees) && !empty($paymentFees)) {
+                $paymentFees = $this->serialize->unserialize($paymentFees);
+            }
+
+            if (is_array($paymentFees)) {
+                foreach ($paymentFees as $paymentFee) {
+                    $this->methodFee[$paymentFee['payment_method']] = [
+                        'fee' => $paymentFee['fee']
                     ];
                 }
             }
         }
+
         return $this->methodFee;
     }
 
@@ -198,7 +202,7 @@ class Data extends AbstractHelper
      */
     public function canApply(Quote $quote)
     {
-        $this->_getPaymentFee();
+        $this->getPaymentFee();
         if ($this->isEnable()) {
             if ($method = $quote->getPayment()->getMethod()) {
                 if (isset($this->methodFee[$method])) {
