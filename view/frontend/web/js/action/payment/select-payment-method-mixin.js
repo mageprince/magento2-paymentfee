@@ -13,11 +13,9 @@ define(
             return wrapper.wrap(selectPaymentMethodAction, function (originalSelectPaymentMethodAction, paymentMethod) {
                 originalSelectPaymentMethodAction(paymentMethod);
 
-                if (!require.defined('Magento_SalesRule/js/action/select-payment-method-mixin')) {
-                    let isEnabled = window.checkoutConfig.mageprince_paymentfee.isEnabled;
-                    if (isEnabled) {
-                        totals(isLoading, paymentMethod['method']);
-                    }
+                let isEnabled = window.checkoutConfig.mageprince_paymentfee.isEnabled;
+                if (isEnabled) {
+                    totals(isLoading, paymentMethod['method']);
                 }
             });
         };
