@@ -34,6 +34,7 @@ class AddPaymentfeeItem implements ObserverInterface
 
     /**
      * Add custom amount as custom item to payment cart totals
+     *
      * @param Observer $observer
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
@@ -42,6 +43,9 @@ class AddPaymentfeeItem implements ObserverInterface
     {
         $cart = $observer->getCart();
         $quote = $this->checkoutSession->getQuote();
-        $cart->addCustomItem(__('Payment Fee'), 1, $quote->getBasePaymentFee(), 'paymentfee');
+        $paymentFee = $quote->getBasePaymentFee();
+        if ($paymentFee > 0) {
+            $cart->addCustomItem(__('Payment Fee'), 1, $paymentFee, 'paymentfee');
+        }
     }
 }
