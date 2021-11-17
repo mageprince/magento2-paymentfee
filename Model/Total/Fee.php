@@ -39,6 +39,7 @@ class Fee extends Address\Total\AbstractTotal
 
     /**
      * Fee constructor.
+     *
      * @param CalculatorInterface $calculator
      * @param FeeHelper $helper
      * @param Calculation $taxCalculator
@@ -54,6 +55,8 @@ class Fee extends Address\Total\AbstractTotal
     }
 
     /**
+     * Collect fee
+     *
      * @param Quote $quote
      * @param \Magento\Quote\Api\Data\ShippingAssignmentInterface $shippingAssignment
      * @param Total $total
@@ -125,6 +128,8 @@ class Fee extends Address\Total\AbstractTotal
     }
 
     /**
+     * Fetch fee
+     *
      * @param Quote $quote
      * @param Total $total
      * @return array
@@ -153,6 +158,8 @@ class Fee extends Address\Total\AbstractTotal
     }
 
     /**
+     * Get address
+     *
      * @param Quote $quote
      * @return Address
      */
@@ -163,6 +170,7 @@ class Fee extends Address\Total\AbstractTotal
 
     /**
      * Get tax request for quote address
+     *
      * @param Quote $quote
      * @return \Magento\Framework\DataObject
      */
@@ -180,6 +188,7 @@ class Fee extends Address\Total\AbstractTotal
 
     /**
      * Get label
+     *
      * @return \Magento\Framework\Phrase
      */
     public function getLabel()

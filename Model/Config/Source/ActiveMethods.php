@@ -26,6 +26,7 @@ class ActiveMethods
 
     /**
      * ActiveMethods constructor.
+     *
      * @param \Magento\Payment\Model\Config $config
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
@@ -37,11 +38,21 @@ class ActiveMethods
         $this->scopeConfig = $scopeConfig;
     }
 
+    /**
+     * Get active payment methods
+     *
+     * @return array
+     */
     protected function _getPaymentMethods()
     {
         return $this->paymentConfig->getActiveMethods();
     }
 
+    /**
+     * Get active payment methods
+     *
+     * @return array
+     */
     public function toOptionArray()
     {
         $methods = [['value'=>'', 'label'=>'']];

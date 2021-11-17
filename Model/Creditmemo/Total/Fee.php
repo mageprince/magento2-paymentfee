@@ -37,6 +37,8 @@ class Fee extends AbstractTotal
     }
 
     /**
+     * Collect fee
+     *
      * @param Creditmemo $creditmemo
      * @return $this
      */

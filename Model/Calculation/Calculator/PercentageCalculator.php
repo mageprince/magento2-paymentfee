@@ -17,12 +17,12 @@ use Magento\Quote\Model\Quote;
 class PercentageCalculator extends AbstractCalculator
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function calculate(Quote $quote)
     {
         $fee = $this->helper->getFee($quote);
-        
+
         $subTotal = $quote->getBaseSubtotal();
 
         if ($this->helper->getIsIncludeShipping()) {
@@ -36,7 +36,7 @@ class PercentageCalculator extends AbstractCalculator
             }
             $subTotal += $discount;
         }
-        
+
         return ($subTotal * $fee) / 100;
     }
 }

@@ -49,7 +49,7 @@ class CalculationService implements CalculatorInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function calculate(Quote $quote)
     {
@@ -83,6 +83,7 @@ class CalculationService implements CalculatorInterface
 
     /**
      * Check is order has minimum order total
+     *
      * @param Quote $quote
      * @return bool
      */
@@ -94,6 +95,7 @@ class CalculationService implements CalculatorInterface
 
     /**
      * Check is order has maximum order total
+     *
      * @param Quote $quote
      * @return bool
      */
@@ -105,6 +107,7 @@ class CalculationService implements CalculatorInterface
 
     /**
      * Check is customer group allowed
+     *
      * @param Quote $quote
      * @return bool
      */

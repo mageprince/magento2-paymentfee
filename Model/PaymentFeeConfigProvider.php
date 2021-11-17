@@ -24,13 +24,17 @@ class PaymentFeeConfigProvider implements ConfigProviderInterface
 
     /**
      * PaymentFeeConfigProvider constructor.
+     *
      * @param Data $helper
      */
-    public function __construct(Data $helper) {
+    public function __construct(Data $helper)
+    {
         $this->helper = $helper;
     }
 
     /**
+     * Get payment fee config
+     *
      * @return array
      */
     public function getConfig()

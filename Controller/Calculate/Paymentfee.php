@@ -64,6 +64,7 @@ class Paymentfee extends \Magento\Framework\App\Action\Action
 
     /**
      * Calculate payment fee
+     *
      * @return \Magento\Framework\Controller\Result\Json
      */
     public function execute()

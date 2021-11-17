@@ -10,6 +10,8 @@
  * @author MagePrince <info@mageprince.com>
  */
 
+// @codingStandardsIgnoreFile
+// Keep this file to support old magento version
 namespace Mageprince\Paymentfee\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
@@ -20,6 +22,8 @@ use Magento\Framework\DB\Ddl\Table;
 class InstallSchema implements InstallSchemaInterface
 {
     /**
+     * Add paymenfee columns
+     *
      * @param SchemaSetupInterface $setup
      * @param ModuleContextInterface $context
      */
@@ -32,6 +36,7 @@ class InstallSchema implements InstallSchemaInterface
 
     /**
      * Add payment fee columns
+     *
      * @param SchemaSetupInterface $setup
      */
     public function addPaymentFeeColumns($setup)

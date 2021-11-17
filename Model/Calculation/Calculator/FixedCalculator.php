@@ -17,7 +17,7 @@ use Magento\Quote\Model\Quote;
 class FixedCalculator extends AbstractCalculator
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function calculate(Quote $quote)
     {

@@ -10,6 +10,8 @@
  * @author MagePrince <info@mageprince.com>
  */
 
+// @codingStandardsIgnoreFile
+// Keep this file to support old magento version
 namespace Mageprince\Paymentfee\Setup;
 
 use Magento\Framework\DB\Ddl\Table;
@@ -35,7 +37,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
     /**
      * Create payment fee tax columns
-     * @param $setup
+     *
+     * @param SchemaSetupInterface $setup
      */
     public function addPaymentFeeTaxColumns($setup)
     {

@@ -51,6 +51,7 @@ class Fee extends DefaultTotal
 
     /**
      * Add payment fee totals in sales PDF
+     *
      * @return array
      */
     public function getTotalsForDisplay()

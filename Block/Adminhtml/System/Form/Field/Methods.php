@@ -39,6 +39,7 @@ class Methods extends Select
 
     /**
      * Methods constructor.
+     *
      * @param Context $context
      * @param PaymentModelConfig $config
      * @param PaymentMethodFactory $paymentMethodFactory
@@ -55,6 +56,11 @@ class Methods extends Select
         $this->paymentMethodFactory = $paymentMethodFactory;
     }
 
+    /**
+     * Get payment methods
+     *
+     * @return array
+     */
     protected function _getPaymentMethods()
     {
         if ($this->methods === null) {
@@ -70,6 +76,8 @@ class Methods extends Select
     }
 
     /**
+     * Set input name
+     *
      * @param string $value
      * @return $this
      */

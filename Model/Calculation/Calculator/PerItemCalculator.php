@@ -17,7 +17,7 @@ use Magento\Quote\Model\Quote;
 class PerItemCalculator extends AbstractCalculator
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function calculate(Quote $quote)
     {

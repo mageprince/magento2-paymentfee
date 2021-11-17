@@ -43,6 +43,8 @@ class ConfigChange implements ObserverInterface
     }
 
     /**
+     * Add payment fee sort order
+     *
      * @param EventObserver $observer
      * @return $this
      */

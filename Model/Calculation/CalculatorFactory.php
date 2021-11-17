@@ -42,6 +42,8 @@ class CalculatorFactory
     }
 
     /**
+     * Get fee
+     *
      * @return Calculator\CalculatorInterface
      * @throws ConfigurationMismatchException
      */

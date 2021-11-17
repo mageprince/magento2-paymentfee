@@ -17,7 +17,7 @@ use Magento\Quote\Model\Quote;
 class PerRowCalculator extends AbstractCalculator
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function calculate(Quote $quote)
     {

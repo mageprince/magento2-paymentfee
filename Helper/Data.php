@@ -12,8 +12,14 @@
 
 namespace Mageprince\Paymentfee\Helper;
 
+use Magento\Backend\Model\Session\Quote as SessionQuote;
+use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Helper\Context;
+use Magento\Framework\Pricing\Helper\Data as PriceHelper;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Quote\Model\Quote;
 use Magento\Store\Model\ScopeInterface;
 use Mageprince\Paymentfee\Model\Config\Source\ConfigData;
@@ -21,7 +27,7 @@ use Mageprince\Paymentfee\Model\Config\Source\ConfigData;
 class Data extends AbstractHelper
 {
     /**
-     * @var \Magento\Framework\Serialize\Serializer\Json
+     * @var Json
      */
     private $serialize;
 
@@ -31,40 +37,39 @@ class Data extends AbstractHelper
     protected $methodFee = [];
 
     /**
-     * Session quote
-     *
-     * @var \Magento\Backend\Model\Session\Quote
+     * @var SessionQuote
      */
     protected $_sessionQuote;
 
     /**
-     * @var \Magento\Customer\Api\CustomerRepositoryInterface
+     * @var CustomerRepositoryInterface
      */
     protected $_customerRepositoryInterface;
 
     /**
-     * @var \Magento\Framework\Pricing\Helper\Data
+     * @var PriceHelper
      */
     private $_priceHelper;
 
     /**
      * Data constructor.
-     * @param \Magento\Framework\App\Helper\Context $context
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeInterface
-     * @param \Magento\Framework\Serialize\Serializer\Json $serialize
+     *
+     * @param Context $context
+     * @param ScopeConfigInterface $scopeInterface
+     * @param Json $serialize
      * @param CustomerSession $customerSession
-     * @param \Magento\Backend\Model\Session\Quote $sessionQuote
-     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepositoryInterface
-     * @param \Magento\Framework\Pricing\Helper\Data $priceHelper
+     * @param SessionQuote $sessionQuote
+     * @param CustomerRepositoryInterface $customerRepositoryInterface
+     * @param PriceHelper $priceHelper
      */
     public function __construct(
-        \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeInterface,
-        \Magento\Framework\Serialize\Serializer\Json $serialize,
+        Context $context,
+        ScopeConfigInterface $scopeInterface,
+        Json $serialize,
         CustomerSession $customerSession,
-        \Magento\Backend\Model\Session\Quote $sessionQuote,
-        \Magento\Customer\Api\CustomerRepositoryInterface $customerRepositoryInterface,
-        \Magento\Framework\Pricing\Helper\Data $priceHelper
+        SessionQuote $sessionQuote,
+        CustomerRepositoryInterface $customerRepositoryInterface,
+        PriceHelper $priceHelper
     ) {
         parent::__construct($context);
         $this->serialize = $serialize;
@@ -76,7 +81,9 @@ class Data extends AbstractHelper
 
     /**
      * Get config value
-     * @param $config
+     *
+     * @param string $path
+     * @param int $storeId
      * @return mixed
      */
     public function getConfig($path, $storeId = null)
@@ -90,6 +97,7 @@ class Data extends AbstractHelper
 
     /**
      * Get module status
+     *
      * @return bool
      */
     public function isEnable()
@@ -102,6 +110,7 @@ class Data extends AbstractHelper
 
     /**
      * Get description status
+     *
      * @return bool
      */
     public function isDescription()
@@ -111,6 +120,7 @@ class Data extends AbstractHelper
 
     /**
      * Get description
+     *
      * @return bool
      */
     public function getDescription()
@@ -119,6 +129,7 @@ class Data extends AbstractHelper
     }
     /**
      * Get minimum order amount to add payment fee
+     *
      * @return bool
      */
     public function getMinOrderTotal()
@@ -128,6 +139,7 @@ class Data extends AbstractHelper
 
     /**
      * Get maximum order amount to add payment fee
+     *
      * @return bool
      */
     public function getMaxOrderTotal()
@@ -137,6 +149,7 @@ class Data extends AbstractHelper
 
     /**
      * Get payment fee title
+     *
      * @param int $storeId
      * @return string
      */
@@ -147,6 +160,7 @@ class Data extends AbstractHelper
 
     /**
      * Get payment fee price type
+     *
      * @return bool
      */
     public function getPriceType()
@@ -156,6 +170,7 @@ class Data extends AbstractHelper
 
     /**
      * Get allowed customer group
+     *
      * @return bool
      */
     public function getAllowedCustomerGroup()
@@ -165,6 +180,8 @@ class Data extends AbstractHelper
 
     /**
      * Get is refund payment fee
+     *
+     * @param int $storeId
      * @return bool
      */
     public function isRefund($storeId)
@@ -174,6 +191,7 @@ class Data extends AbstractHelper
 
     /**
      * Get payment fees
+     *
      * @return array
      */
     public function getPaymentFee()
@@ -197,6 +215,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Check can apply
+     *
      * @param Quote $quote
      * @return bool
      */
@@ -214,6 +234,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Get fee
+     *
      * @param Quote $quote
      * @return float|int
      */
@@ -226,6 +248,7 @@ class Data extends AbstractHelper
 
     /**
      * Get selected customer groups
+     *
      * @return array
      */
     public function getCustomerGroup()
@@ -235,8 +258,10 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @param $baseFee
-     * @param $quote
+     * Get store fee
+     *
+     * @param float $baseFee
+     * @param Quote $quote
      * @return float|string
      */
     public function getStoreFee($baseFee, $quote)
@@ -251,6 +276,8 @@ class Data extends AbstractHelper
 
     /**
      * Check is tax enabled
+     *
+     * @param int $storeId
      * @return bool
      */
     public function isTaxEnabled($storeId = null)
@@ -264,6 +291,7 @@ class Data extends AbstractHelper
 
     /**
      * Get tax class id
+     *
      * @return int
      */
     public function getTaxClassId()
@@ -273,6 +301,8 @@ class Data extends AbstractHelper
 
     /**
      * Get tax display type
+     *
+     * @param int $storeId
      * @return int
      */
     public function getTaxDisplay($storeId = null)
@@ -282,6 +312,8 @@ class Data extends AbstractHelper
 
     /**
      * Check is incl. tax displayed
+     *
+     * @param int $storeId
      * @return bool
      */
     public function displayInclTax($storeId = null)
@@ -291,6 +323,8 @@ class Data extends AbstractHelper
 
     /**
      * Check is excl. tax displayed
+     *
+     * @param int $storeId
      * @return bool
      */
     public function displayExclTax($storeId = null)
@@ -300,6 +334,7 @@ class Data extends AbstractHelper
 
     /**
      * Check is tax suffix added
+     *
      * @return bool
      */
     public function displaySuffix()
@@ -309,6 +344,7 @@ class Data extends AbstractHelper
 
     /**
      * Check if include shipping in subtotal
+     *
      * @return bool
      */
     public function getIsIncludeShipping()
@@ -318,6 +354,7 @@ class Data extends AbstractHelper
 
     /**
      * Check if include discount in subtotal
+     *
      * @return bool
      */
     public function getIsIncludeDiscount()

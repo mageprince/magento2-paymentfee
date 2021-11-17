@@ -47,6 +47,8 @@ class Totals extends Template
     }
 
     /**
+     * Get source
+     *
      * @return mixed
      */
     public function getSource()
@@ -54,8 +56,9 @@ class Totals extends Template
         return $this->getParentBlock()->getSource();
     }
 
-
     /**
+     * Init totals
+     *
      * @return $this
      */
     public function initTotals()

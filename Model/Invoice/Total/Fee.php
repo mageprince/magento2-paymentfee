@@ -18,6 +18,8 @@ use Magento\Sales\Model\Order\Invoice\Total\AbstractTotal;
 class Fee extends AbstractTotal
 {
     /**
+     * Collect invoice totals
+     *
      * @param Invoice $invoice
      * @return $this
      */

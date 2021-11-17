@@ -21,6 +21,9 @@ use Mageprince\Paymentfee\Model\Config\Source\ActiveMethods;
 
 class PaymentFee extends AbstractFieldArray
 {
+    /**
+     * @var array
+     */
     protected $_columns = [];
 
     /**
@@ -28,6 +31,9 @@ class PaymentFee extends AbstractFieldArray
      */
     protected $_typeRenderer;
 
+    /**
+     * @var mixed
+     */
     protected $_searchFieldRenderer;
 
     /**
@@ -52,6 +58,7 @@ class PaymentFee extends AbstractFieldArray
 
     /**
      * Prepare to render
+     *
      * @throws LocalizedException
      */
     protected function _prepareToRender()
@@ -70,6 +77,8 @@ class PaymentFee extends AbstractFieldArray
     }
 
     /**
+     * Get payment renderer
+     *
      * @return BlockInterface|Methods
      * @throws LocalizedException
      */
@@ -88,6 +97,7 @@ class PaymentFee extends AbstractFieldArray
 
     /**
      * Prepare existing row data object
+     *
      * @param DataObject $row
      * @throws LocalizedException
      */
