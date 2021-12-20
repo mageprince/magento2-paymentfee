@@ -14,7 +14,7 @@ define(
                 originalSelectPaymentMethodAction(paymentMethod);
 
                 let isEnabled = window.checkoutConfig.mageprince_paymentfee.isEnabled;
-                if (isEnabled) {
+                if (isEnabled && paymentMethod) {
                     totals(isLoading, paymentMethod['method']);
                 }
             });
