@@ -137,7 +137,6 @@ class Fee extends Address\Total\AbstractTotal
     public function fetch(Quote $quote, Total $total)
     {
         $fee = $total->getPaymentFee();
-        $address = $this->getAddressFromQuote($quote);
 
         $result = [
             [
@@ -147,7 +146,11 @@ class Fee extends Address\Total\AbstractTotal
             ]
         ];
 
-        if ($this->helper->isTaxEnabled() && $this->helper->displayInclTax()) {
+        if ($this->helper->isTaxEnabled() &&
+            $this->helper->displayInclTax() &&
+            !$this->helper->isBackendArea()
+        ) {
+            $address = $this->getAddressFromQuote($quote);
             $result [] = [
                 'code' => 'payment_fee_incl_tax',
                 'value' => $fee + $address->getPaymentFeeTax()

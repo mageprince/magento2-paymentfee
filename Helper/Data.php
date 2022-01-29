@@ -12,12 +12,14 @@
 
 namespace Mageprince\Paymentfee\Helper;
 
+use Magento\Backend\App\Area\FrontNameResolver;
 use Magento\Backend\Model\Session\Quote as SessionQuote;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
+use Magento\Framework\App\State;
 use Magento\Framework\Pricing\Helper\Data as PriceHelper;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Quote\Model\Quote;
@@ -49,7 +51,12 @@ class Data extends AbstractHelper
     /**
      * @var PriceHelper
      */
-    private $_priceHelper;
+    protected $_priceHelper;
+
+    /**
+     * @var State
+     */
+    protected State $state;
 
     /**
      * Data constructor.
@@ -61,6 +68,7 @@ class Data extends AbstractHelper
      * @param SessionQuote $sessionQuote
      * @param CustomerRepositoryInterface $customerRepositoryInterface
      * @param PriceHelper $priceHelper
+     * @param State $state
      */
     public function __construct(
         Context $context,
@@ -69,14 +77,16 @@ class Data extends AbstractHelper
         CustomerSession $customerSession,
         SessionQuote $sessionQuote,
         CustomerRepositoryInterface $customerRepositoryInterface,
-        PriceHelper $priceHelper
+        PriceHelper $priceHelper,
+        State $state
     ) {
-        parent::__construct($context);
         $this->serialize = $serialize;
         $this->customerSession = $customerSession;
         $this->_sessionQuote = $sessionQuote;
         $this->_customerRepositoryInterface = $customerRepositoryInterface;
         $this->_priceHelper = $priceHelper;
+        $this->state = $state;
+        parent::__construct($context);
     }
 
     /**
@@ -360,5 +370,23 @@ class Data extends AbstractHelper
     public function getIsIncludeDiscount()
     {
         return $this->getConfig(ConfigData::PAYMENTFEE_DISCOUNT_INCLUDE_XML_PATH);
+    }
+
+    /**
+     * Check is backend area
+     *
+     * @return bool
+     */
+    public function isBackendArea()
+    {
+        $isBackend = false;
+        try {
+            $areaCode = $this->state->getAreaCode();
+            if ($areaCode == FrontNameResolver::AREA_CODE) {
+                $isBackend = true;
+            }
+        } catch (\Exception $e) {
+        }
+        return $isBackend;
     }
 }
