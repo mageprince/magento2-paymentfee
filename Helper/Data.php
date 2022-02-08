@@ -56,7 +56,7 @@ class Data extends AbstractHelper
     /**
      * @var State
      */
-    protected State $state;
+    protected $state;
 
     /**
      * Data constructor.
