@@ -15,7 +15,6 @@ namespace Mageprince\Paymentfee\Helper;
 use Magento\Backend\App\Area\FrontNameResolver;
 use Magento\Backend\Model\Session\Quote as SessionQuote;
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
@@ -64,7 +63,6 @@ class Data extends AbstractHelper
      * @param Context $context
      * @param ScopeConfigInterface $scopeInterface
      * @param Json $serialize
-     * @param CustomerSession $customerSession
      * @param SessionQuote $sessionQuote
      * @param CustomerRepositoryInterface $customerRepositoryInterface
      * @param PriceHelper $priceHelper
@@ -74,14 +72,12 @@ class Data extends AbstractHelper
         Context $context,
         ScopeConfigInterface $scopeInterface,
         Json $serialize,
-        CustomerSession $customerSession,
         SessionQuote $sessionQuote,
         CustomerRepositoryInterface $customerRepositoryInterface,
         PriceHelper $priceHelper,
         State $state
     ) {
         $this->serialize = $serialize;
-        $this->customerSession = $customerSession;
         $this->_sessionQuote = $sessionQuote;
         $this->_customerRepositoryInterface = $customerRepositoryInterface;
         $this->_priceHelper = $priceHelper;
