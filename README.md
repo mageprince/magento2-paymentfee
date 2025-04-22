@@ -21,13 +21,12 @@ The Magento 2 Payment Fee extension by MagePrince allows store owners to add ext
    - Checkout Page
    - Order Summary
    - Sales Emails (Order, Invoice, Credit Memo)
- - Admin Order View
- - Set custom titles and descriptions for fees
+   - Admin Order View
+ - Set custom titles for fees
  - Refundable fee option in credit memo
  - Disable fees for orders exceeding a maximum amount
  - Customer group restrictions
  - Store view restrictions
- - Supports default extra fee (applies even without specific method match)
  - Set sort order for fee display
  - Supports tax calculation on the fee
    - Assign tax class
@@ -35,20 +34,38 @@ The Magento 2 Payment Fee extension by MagePrince allows store owners to add ext
  - Multi-store and multi-currency support
  - Option to include discount/shipping in subtotal for calculation
 
-## 🔧 Admin Configuration
+## 💡 Payment Fee Types Explained
+**1. Fixed Price**
 
-**Navigate to:** Admin Panel → Stores → Configuration → MagePrince → Payment Fee
+A flat fee is added to the order, no matter what’s in the cart.
 
-You can:
- - Enable/disable the module
- - Set global and per-method fees
- - Configure refund behavior
- - Restrict by store view or customer group
- - Manage fee visibility and label
+Example: Fee = 10 → You pay 10 extra.
+
+**2. Percentage Price**
+
+The fee is a percentage of the cart subtotal.
+- If “Include shipping in subtotal” is Yes:
+  - Subtotal = Products + Shipping
+- If “Include discount in subtotal” is Yes:
+  - Subtotal = Subtotal - Discount
+
+Example: Fee = 10%, Subtotal = 36 → Extra = 3.60
+
+**3. Per Row**
+
+Fee is added based on the number of products (rows) in the cart.
+
+Example: Fee = 10, Cart = 2 products → Extra = 20
+
+**4. Per Item**
+
+Fee is based on the total quantity of all products in the cart.
+
+Example: Fee = 10, Cart = 3 items total → Extra = 30
 
 ## 🧪 Demo
 
-<b><a href="http://demo2.mageprince.com/">Frontend</a>   |   <a href="http://demo2.mageprince.com/admin">Backend</a></b>
+<b><a href="http://demo.mageprince.com/">Frontend</a>   |   <a href="http://demo.mageprince.com/admin">Backend</a></b>
 
 ## 🚀 Installation Instructions
 
@@ -80,11 +97,14 @@ If you encounter any problems or bugs, please <a href="https://github.com/magepr
 
 ## 📸 Screenshots
 
-<h3>Checkout Page</h3>
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/checkout_page_2.png" />
+### Checkout Page
+<img width="1248" alt="image" src="https://github.com/user-attachments/assets/b22c94e7-5c89-4c48-8929-cde1b6dd68f4" />
 
-<h3>Configuration</h3>
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/paymentfee-config1.jpg" />
-<img src="https://raw.githubusercontent.com/mageprince/all-module-screenshots/master/PaymentFee/paymentfee-config2.jpg" />
+
+### Configuration
+<img width="986" alt="image" src="https://github.com/user-attachments/assets/2e8df15a-2ae3-41cf-91f0-9bb975b35eb0" />
+<img width="1007" alt="image" src="https://github.com/user-attachments/assets/8239f224-985f-498e-9af7-b84bc2372534" />
+
+
 
 
