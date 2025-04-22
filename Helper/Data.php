@@ -71,7 +71,6 @@ class Data extends AbstractHelper
      * Data constructor.
      *
      * @param Context $context
-     * @param ScopeConfigInterface $scopeInterface
      * @param Json $serialize
      * @param SessionQuote $sessionQuote
      * @param CustomerRepositoryInterface $customerRepositoryInterface
@@ -80,7 +79,6 @@ class Data extends AbstractHelper
      */
     public function __construct(
         Context $context,
-        ScopeConfigInterface $scopeInterface,
         Json $serialize,
         SessionQuote $sessionQuote,
         CustomerRepositoryInterface $customerRepositoryInterface,
