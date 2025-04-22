@@ -1,8 +1,13 @@
 # Magento 2 Payment Fee
 
-The Magento 2 Payment Fee extension by MagePrince allows store owners to add extra charges for specific payment methods. These fees are shown throughout the customer journey — on the cart, checkout, order summary, invoice, credit memo, and sales emails.
+The Magento 2 Payment Fee extension by MagePrince allows store owners to add extra charges for specific payment methods. These fees are shown throughout the customer journey — on the cart, checkout, order summary, invoice, credit memo, and sales emails. Admins can configure different types of fees, control visibility based on customer groups or store views, and even apply rules like disabling fees over a certain order amount. The extension also supports tax and refund settings for complete flexibility.
 
-Admins can configure different types of fees, control visibility based on customer groups or store views, and even apply rules like disabling fees over a certain order amount. The extension also supports tax and refund settings for complete flexibility.
+[![Latest Stable Version](https://poser.pugx.org/mageprince/magento2-paymentfee/v)](//packagist.org/packages/mageprince/magento2-paymentfee)
+[![Total Downloads](https://poser.pugx.org/mageprince/magento2-paymentfee/downloads)](//packagist.org/packages/mageprince/magento2-paymentfee)
+[![Monthly Downloads](https://poser.pugx.org/mageprince/magento2-paymentfee/d/monthly)](//packagist.org/packages/mageprince/magento2-paymentfee)
+[![License](https://poser.pugx.org/mageprince/magento2-paymentfee/license)](//packagist.org/packages/mageprince/magento2-paymentfee)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/?branch=master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 
 ## ✨ Features
  - Enable or disable the extension from admin configuration
