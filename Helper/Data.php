@@ -25,7 +25,6 @@ namespace Mageprince\Paymentfee\Helper;
 use Magento\Backend\App\Area\FrontNameResolver;
 use Magento\Backend\Model\Session\Quote as SessionQuote;
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\App\State;
