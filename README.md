@@ -8,7 +8,7 @@ The Magento 2 Payment Fee extension by MagePrince allows store owners to add ext
 [![License](https://poser.pugx.org/mageprince/magento2-paymentfee/license)](//packagist.org/packages/mageprince/magento2-paymentfee)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/?branch=master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
-
+  
 ## ✨ Features
  - Enable or disable the extension from admin configuration
  - Add payment fees for specific payment methods (e.g., COD, PayPal)
@@ -87,6 +87,11 @@ php bin/magento setup:di:compile
 php bin/magento setup:static-content:deploy
 ```
 
+## ✅ Compatibility
+
+- Magento Open Source (Community Edition): 2.4.4 – 2.4.8
+- Adobe Commerce (Enterprise Edition): 2.4.4 – 2.4.8
+  
 ## 🤝 Contribution
 
 Want to contribute to this extension? The quickest way is to <a href="https://help.github.com/articles/about-pull-requests/">open a pull request</a> on GitHub.
