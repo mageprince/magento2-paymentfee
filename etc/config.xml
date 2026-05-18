@@ -48,6 +48,7 @@
         <sales>
             <totals_sort>
                 <mageprince_paymentfee>35</mageprince_paymentfee>
+                <payment_fee>35</payment_fee>
             </totals_sort>
         </sales>
     </default>
