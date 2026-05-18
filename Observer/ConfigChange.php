@@ -65,6 +65,7 @@ class ConfigChange implements ObserverInterface
         if (isset($paymentFeeSettings['total_sortorder']['value'])) {
             $totalsSortOrderVal = $paymentFeeSettings['total_sortorder']['value'];
             $this->configWriter->save('sales/totals_sort/mageprince_paymentfee', $totalsSortOrderVal);
+            $this->configWriter->save('sales/totals_sort/payment_fee', $totalsSortOrderVal);
         }
         return $this;
     }

@@ -28,4 +28,9 @@
             </argument>
         </arguments>
     </type>
+    <!-- for hyva theme compatibility -->
+    <type name="Hyva\Checkout\ViewModel\Checkout\PriceSummary\TotalSegments">
+        <plugin name="mageprince_paymentfee_hyva_checkout_totals"
+                type="Mageprince\Paymentfee\Plugin\HyvaCheckoutTotals"/>
+    </type>
 </config>

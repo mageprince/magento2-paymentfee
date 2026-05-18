@@ -1,0 +1,82 @@
+<?php
+/**
+ * Mageprince
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the mageprince.com license that is
+ * available through the world-wide-web at this URL:
+ * https://mageprince.com/end-user-license-agreement
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageprince
+ * @package     Mageprince_Paymentfee
+ * @copyright   Copyright (c) Mageprince (https://mageprince.com/)
+ * @license     https://mageprince.com/end-user-license-agreement
+ */
+?>
+<template x-if="segment.code === 'payment_fee' && segment.value != 0">
+    <div>
+        <template x-if="checkoutConfig.mageprince_paymentfee.isTaxEnabled
+            && checkoutConfig.mageprince_paymentfee.displayBoth">
+            <div>
+                <div :class="wrapperClass">
+                    <div x-text="checkoutConfig.mageprince_paymentfee.title + ' ' + excludingTaxMessage"></div>
+                    <div
+                        class="justify-self-end"
+                        x-text="hyva.formatPrice(segment.value)"
+                    ></div>
+                </div>
+                <div :class="wrapperClass">
+                    <div x-text="checkoutConfig.mageprince_paymentfee.title + ' ' + includingTaxMessage"></div>
+                    <div
+                        class="justify-self-end"
+                        x-text="hyva.formatPrice(
+                            (getTotals().total_segments.find((totalSegment) => totalSegment.code === 'payment_fee_incl_tax') || segment).value
+                        )"
+                    ></div>
+                </div>
+            </div>
+        </template>
+        <template x-if="checkoutConfig.mageprince_paymentfee.isTaxEnabled
+            && !checkoutConfig.mageprince_paymentfee.displayBoth
+            && checkoutConfig.mageprince_paymentfee.displayInclTax">
+            <div :class="wrapperClass">
+                <div>
+                    <span x-text="checkoutConfig.mageprince_paymentfee.title"></span>
+                    <span
+                        class="block text-sm"
+                        x-show="checkoutConfig.mageprince_paymentfee.description"
+                        x-text="checkoutConfig.mageprince_paymentfee.description"
+                    ></span>
+                </div>
+                <div
+                    class="justify-self-end"
+                    x-text="hyva.formatPrice(
+                        (getTotals().total_segments.find((totalSegment) => totalSegment.code === 'payment_fee_incl_tax') || segment).value
+                    )"
+                ></div>
+            </div>
+        </template>
+        <template x-if="!checkoutConfig.mageprince_paymentfee.isTaxEnabled
+            || (checkoutConfig.mageprince_paymentfee.isTaxEnabled
+                && !checkoutConfig.mageprince_paymentfee.displayBoth
+                && checkoutConfig.mageprince_paymentfee.displayExclTax)">
+            <div :class="wrapperClass">
+                <div>
+                    <span x-text="checkoutConfig.mageprince_paymentfee.title"></span>
+                    <span
+                        class="block text-sm"
+                        x-show="checkoutConfig.mageprince_paymentfee.description"
+                        x-text="checkoutConfig.mageprince_paymentfee.description"
+                    ></span>
+                </div>
+                <div class="justify-self-end" x-text="hyva.formatPrice(segment.value)"></div>
+            </div>
+        </template>
+    </div>
+</template>

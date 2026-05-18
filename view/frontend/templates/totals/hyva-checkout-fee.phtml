@@ -1,0 +1,82 @@
+<?php
+/**
+ * Mageprince
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the mageprince.com license that is
+ * available through the world-wide-web at this URL:
+ * https://mageprince.com/end-user-license-agreement
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageprince
+ * @package     Mageprince_Paymentfee
+ * @copyright   Copyright (c) Mageprince (https://mageprince.com/)
+ * @license     https://mageprince.com/end-user-license-agreement
+ */
+
+declare(strict_types=1);
+
+use Hyva\Checkout\ViewModel\Checkout\Formatter as FormatterViewModel;
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var FormatterViewModel $formatterViewModel */
+/** @var ViewModelRegistry $viewModels */
+/** @var Escaper $escaper */
+
+$formatterViewModel = $viewModels->require(FormatterViewModel::class);
+$segment = $block->getSegment();
+$title = $segment['title'] ?? (string) __('Payment Fee');
+$description = $segment['description'] ?? '';
+?>
+<?php if (($segment['value_excl_tax'] ?? 0) != 0): ?>
+    <?php if ($segment['is_tax_enabled'] && $segment['display_both']): ?>
+        <div class="flex gap-4 justify-between md:gap-0">
+            <span class="label min-w-0 break-words wrap-break-word">
+                <?= $escaper->escapeHtml(__('%1 Excl. Tax', $title)) ?>
+            </span>
+            <span class="value">
+                <?= /* @noEscape */ $formatterViewModel->currency($segment['value_excl_tax'] ?? 0) ?>
+            </span>
+        </div>
+        <div class="flex gap-4 justify-between md:gap-0">
+            <span class="label min-w-0 break-words wrap-break-word">
+                <?= $escaper->escapeHtml(__('%1 Incl. Tax', $title)) ?>
+            </span>
+            <span class="value">
+                <?= /* @noEscape */ $formatterViewModel->currency($segment['value_incl_tax'] ?? 0) ?>
+            </span>
+        </div>
+    <?php elseif ($segment['is_tax_enabled'] && $segment['display_incl_tax']): ?>
+        <div class="flex gap-4 justify-between md:gap-0">
+            <span class="label min-w-0 break-words wrap-break-word">
+                <?= $escaper->escapeHtml($title) ?>
+                <?php if ($description): ?>
+                    <span class="block text-sm"><?= $escaper->escapeHtml($description) ?></span>
+                <?php endif; ?>
+            </span>
+            <span class="value">
+                <?= /* @noEscape */ $formatterViewModel->currency($segment['value_incl_tax'] ?? 0) ?>
+            </span>
+        </div>
+    <?php else: ?>
+        <div class="flex gap-4 justify-between md:gap-0">
+            <span class="label min-w-0 break-words wrap-break-word">
+                <?= $escaper->escapeHtml($title) ?>
+                <?php if ($description): ?>
+                    <span class="block text-sm"><?= $escaper->escapeHtml($description) ?></span>
+                <?php endif; ?>
+            </span>
+            <span class="value">
+                <?= /* @noEscape */ $formatterViewModel->currency($segment['value_excl_tax'] ?? 0) ?>
+            </span>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

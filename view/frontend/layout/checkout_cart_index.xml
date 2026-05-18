@@ -38,6 +38,8 @@
                     </item>
                 </argument>
             </arguments>
+            <!-- for hyva theme compatibility -->
+            <block name="mageprince_paymentfee" template="Mageprince_Paymentfee::totals/hyva-cart-fee.phtml"/>
         </referenceBlock>
     </body>
 </page>
