@@ -33,6 +33,7 @@ The Magento 2 Payment Fee extension by MagePrince allows store owners to add ext
    - Choose display type: Incl., Excl., or Both
  - Multi-store and multi-currency support
  - Option to include discount/shipping in subtotal for calculation
+ - <a href="https://www.hyva.io/" target="_blank">Hyva</a> Compatibile
 
 ## 💡 Payment Fee Types Explained
 **1. Fixed Price**
