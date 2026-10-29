@@ -1,13 +1,20 @@
 # Magento 2 Payment Fee
 
+<p>
+<a href="https://packagist.org/packages/mageprince/magento2-paymentfee"><img src="https://img.shields.io/packagist/v/mageprince/magento2-paymentfee?style=for-the-badge&logo=packagist&logoColor=F28D1A&label=packagist&color=2F7FC1" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/mageprince/magento2-paymentfee/stats"><img src="https://img.shields.io/packagist/dt/mageprince/magento2-paymentfee?style=for-the-badge&logo=packagist&logoColor=white&label=downloads&color=D4B53A" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/mageprince/magento2-paymentfee/stats"><img src="https://img.shields.io/packagist/dm/mageprince/magento2-paymentfee?style=for-the-badge&label=monthly&color=D4B53A" alt="Monthly Downloads"></a>
+<a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/license-GPL--3.0-232F3E?style=for-the-badge" alt="License: GPL-3.0"></a>
+<a href="https://business.adobe.com/products/magento/magento-commerce.html"><img src="https://img.shields.io/badge/magento-2.4-6CB83A?style=for-the-badge" alt="Magento 2.4"></a>
+<a href="https://www.hyva.io/"><img src="https://img.shields.io/badge/hyv%C3%A4-compatible-0A1A3F?style=for-the-badge" alt="Hyvä compatible"></a>
+<a href="https://mage-os.org/"><img src="https://img.shields.io/badge/mage--os-compatible-F26322?style=for-the-badge" alt="Mage-OS compatible"></a>
+<a href="https://scrutinizer-ci.com/g/mageprince/magento2-paymentfee/?branch=master"><img src="https://img.shields.io/scrutinizer/quality/g/mageprince/magento2-paymentfee/master?style=for-the-badge&logo=scrutinizerci&label=code%20quality" alt="Scrutinizer Code Quality"></a>
+</p>
+
 The Magento 2 Payment Fee extension by MagePrince allows store owners to add extra charges for specific payment methods. These fees are shown throughout the customer journey — on the cart, checkout, order summary, invoice, credit memo, and sales emails. Admins can configure different types of fees, control visibility based on customer groups or store views, and even apply rules like disabling fees over a certain order amount. The extension also supports tax and refund settings for complete flexibility.
 
-[![Latest Stable Version](https://poser.pugx.org/mageprince/magento2-paymentfee/v)](//packagist.org/packages/mageprince/magento2-paymentfee)
-[![Total Downloads](https://poser.pugx.org/mageprince/magento2-paymentfee/downloads)](//packagist.org/packages/mageprince/magento2-paymentfee)
-[![Monthly Downloads](https://poser.pugx.org/mageprince/magento2-paymentfee/d/monthly)](//packagist.org/packages/mageprince/magento2-paymentfee)
-[![License](https://poser.pugx.org/mageprince/magento2-paymentfee/license)](//packagist.org/packages/mageprince/magento2-paymentfee)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/?branch=master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/mageprince/magento2-FAQ/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+<img src="https://github.com/hyva-themes.png?size=40" height="20" align="top" alt="Hyvä"/> **Hyvä Theme compatible** – works out of the box on Hyvä, no compat module needed.<br/>
+<img src="https://github.com/mage-os.png?size=40" height="20" align="top" alt="Mage-OS"/> **Mage-OS compatible** – supports Mage-OS as well as Magento Open Source and Adobe Commerce.
   
 ## ✨ Features
  - Enable or disable the extension from admin configuration
