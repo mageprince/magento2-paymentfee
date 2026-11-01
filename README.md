@@ -71,10 +71,6 @@ Fee is based on the total quantity of all products in the cart.
 
 Example: Fee = 10, Cart = 3 items total → Extra = 30
 
-## 🧪 Demo
-
-<b><a href="http://demo.mageprince.com/">Frontend</a>   |   <a href="http://demo.mageprince.com/admin">Backend</a></b>
-
 ## 🚀 Installation Instructions
 
 ### Option 1: Install via Composer (recommended)
