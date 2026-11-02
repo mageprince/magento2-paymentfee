@@ -22,4 +22,12 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Mageprince\Paymentfee\Model\Calculation\Calculator\CalculatorInterface" type="Mageprince\Paymentfee\Model\Calculation\CalculationService" />
+    <type name="Magento\Sales\Model\Order\CreditmemoFactory">
+        <plugin name="mageprince_paymentfee_creditmemo_requested_fee"
+                type="Mageprince\Paymentfee\Plugin\CreditmemoFactoryFee"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\Creditmemo\Total\Tax">
+        <plugin name="mageprince_paymentfee_creditmemo_reserved_fee_tax"
+                type="Mageprince\Paymentfee\Plugin\CreditmemoTaxTotal"/>
+    </type>
 </config>
