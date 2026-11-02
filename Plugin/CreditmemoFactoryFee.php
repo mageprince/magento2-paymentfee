@@ -91,14 +91,19 @@ class CreditmemoFactoryFee
     /**
      * Store requested fee, or reset it so a previous credit memo's value is never reused
      *
+     * The admin form posts creditmemo[payment_fee]; the REST refund endpoints pass
+     * arguments.extension_attributes.payment_fee, extracted to an array by CreditmemoDocumentFactory.
+     *
      * @param array $data
      * @return void
      */
     private function setRequestedFee(array $data)
     {
+        $value = $data[self::DATA_KEY] ?? $data['extension_attributes'][self::DATA_KEY] ?? null;
+
         $amount = null;
-        if (isset($data[self::DATA_KEY]) && trim((string) $data[self::DATA_KEY]) !== '') {
-            $amount = (float) $this->localeFormat->getNumber($data[self::DATA_KEY]);
+        if ($value !== null && trim((string) $value) !== '') {
+            $amount = (float) $this->localeFormat->getNumber($value);
         }
         $this->requestedFee->setBaseAmount($amount);
     }

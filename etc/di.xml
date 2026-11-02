@@ -26,6 +26,18 @@
         <plugin name="mageprince_paymentfee_creditmemo_requested_fee"
                 type="Mageprince\Paymentfee\Plugin\CreditmemoFactoryFee"/>
     </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="mageprince_paymentfee_extension_attributes"
+                type="Mageprince\Paymentfee\Plugin\AddPaymentFeeExtensionAttributes"/>
+    </type>
+    <type name="Magento\Sales\Api\InvoiceRepositoryInterface">
+        <plugin name="mageprince_paymentfee_extension_attributes"
+                type="Mageprince\Paymentfee\Plugin\AddPaymentFeeExtensionAttributes"/>
+    </type>
+    <type name="Magento\Sales\Api\CreditmemoRepositoryInterface">
+        <plugin name="mageprince_paymentfee_extension_attributes"
+                type="Mageprince\Paymentfee\Plugin\AddPaymentFeeExtensionAttributes"/>
+    </type>
     <type name="Magento\Sales\Model\Order\Creditmemo\Total\Tax">
         <plugin name="mageprince_paymentfee_creditmemo_reserved_fee_tax"
                 type="Mageprince\Paymentfee\Plugin\CreditmemoTaxTotal"/>
