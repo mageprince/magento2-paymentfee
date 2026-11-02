@@ -33,7 +33,7 @@
     </section>
     <section name="order_creditmemo">
         <group name="totals">
-            <item name="payment_fee" instance="Mageprince\Paymentfee\Model\Creditmemo\Total\Fee" sort_order="305"/>
+            <item name="payment_fee" instance="Mageprince\Paymentfee\Model\Creditmemo\Total\Fee" sort_order="240"/>
         </group>
     </section>
 </config>
